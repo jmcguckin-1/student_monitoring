@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -8,8 +8,16 @@ import {Observable} from 'rxjs';
 export class TestServiceService {
 
   constructor(private http: HttpClient) { }
+  private classData = [];
+  setData (x: any){
+    this.classData = x;
+  }
 
-  fetchData(): Observable<string> {
-    return this.http.get<string>('/');
+  getData(){
+    return this.classData;
+  }
+  options = { params: new HttpParams().set('name', "12dfercMa1") };
+ fetchClassData(): Observable<any> {
+    return this.http.get<any>('/api/get_class', this.options);
 }
 }

@@ -4,5 +4,15 @@
       <h1>Student App</h1>
       <p>Angular in Session</p>
     </div>
+
+    <div *ngIf="dataClass">
+      <ul>
+        <li *ngFor="let item of dataClass">
+          {{item.name}}
+           {{item.date}}
+          {{item.students}}
+        </li>
+      </ul>
+    </div>
   </div>
 </main>
