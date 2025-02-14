@@ -1,4 +1,9 @@
 <main class="main">
+  <style>
+    .attendanceInput{
+  width:10%;
+}
+  </style>
   <div class="content">
     <div class="left-side">
       <h1>Student App</h1>
@@ -10,7 +15,13 @@
         <li *ngFor="let item of dataClass">
           {{item.name}}
            {{item.date}}
-          {{item.students}}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="studentList">
+       <ul>
+        <li *ngFor="let item of studentList">
+          {{item}} <input type="text" className="attendanceInput"/>
         </li>
       </ul>
     </div>

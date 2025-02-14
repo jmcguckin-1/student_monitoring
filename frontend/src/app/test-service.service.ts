@@ -16,6 +16,10 @@ export class TestServiceService {
   getData(){
     return this.classData;
   }
+
+  getStudentData(){
+    return this.classData[0]['students'];
+  }
   options = { params: new HttpParams().set('name', "12dfercMa1") };
  fetchClassData(): Observable<any> {
     return this.http.get<any>('/api/get_class', this.options);

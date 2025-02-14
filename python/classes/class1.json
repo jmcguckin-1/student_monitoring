@@ -1,6 +1,14 @@
 {
-  "name": "12dfercMa1",
-  "students": ["Name1", "Name2", "Name3"],
-  "attendance": [],
-  "date": "12-05-2025"
+    "name": "12dfercMa1",
+    "students": [
+        "Name1",
+        "Name2",
+        "Name3"
+    ],
+    "attendance": [
+        "A",
+        "P",
+        "-"
+    ],
+    "date": "12-05-2025"
 }

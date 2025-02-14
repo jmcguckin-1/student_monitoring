@@ -13,6 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit{
   dataClass: any;
+  studentList: any;
   constructor(private testService: TestServiceService) {
 
   }
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit{
     this.testService.fetchClassData().subscribe(data => {
         this.testService.setData(data);
         this.dataClass = this.testService.getData();
+        this.studentList = this.testService.getStudentData();
       }
     )
 
