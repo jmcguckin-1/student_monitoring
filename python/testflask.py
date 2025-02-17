@@ -9,6 +9,10 @@ def get_class():
     name = request.args.get("name")
     return c.get_class(name)
 
+@app.route("/api/get_names")
+def get_names():
+    return c.get_class_names()
+
 @app.route("/api/update_class", methods=['POST'])
 def update_class():
     data = request.json

@@ -1,9 +1,4 @@
-<main class="main">
-  <style>
-    .attendanceInput{
-  width:10%;
-}
-  </style>
+<main class="main" xmlns:position="http://www.w3.org/1999/xhtml">
   <div class="content">
     <div class="left-side">
       <h1>Student App</h1>
@@ -21,9 +16,19 @@
     <div *ngIf="studentList">
        <ul>
         <li *ngFor="let item of studentList">
-          {{item}} <input type="text" className="attendanceInput"/>
+          {{item}} <input type="text" className="attendanceInput" style="width:2%;" />
         </li>
       </ul>
     </div>
+
+     <div *ngIf="namesList">
+       <select #classReg>
+        <option *ngFor="let item of namesList" [value]="item">
+          {{item}}
+        </option>
+      </select>
+       <button (click)="setClass(classReg.value)" style="position:absolute;">Grab Class</button>
+    </div>
+
   </div>
 </main>

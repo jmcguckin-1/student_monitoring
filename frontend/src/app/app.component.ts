@@ -14,18 +14,27 @@ import { BrowserModule } from '@angular/platform-browser';
 export class AppComponent implements OnInit{
   dataClass: any;
   studentList: any;
+  namesList : any;
   constructor(private testService: TestServiceService) {
 
   }
   ngOnInit(): void {
 
-    this.testService.fetchClassData().subscribe(data => {
+    this.testService.fetchNames().subscribe(data => {
+        this.testService.setNames(data);
+        this.namesList = this.testService.getNames();
+    })
+
+  }
+
+  setClass(x: any){
+    this.testService.setClass(x);
+      this.testService.fetchClassData().subscribe(data => {
         this.testService.setData(data);
         this.dataClass = this.testService.getData();
         this.studentList = this.testService.getStudentData();
       }
     )
-
   }
   title = 'frontend';
 

@@ -4,6 +4,13 @@ class Classes:
     def __init__(self):
         pass
 
+    def get_class_names(self):
+        d = []
+        with open("python/classes/class1.json") as f:
+            data = json.load(f)
+            d.append(data['name'])
+        return d
+
     def get_class(self,name):
         d = []
         with open ("python/classes/class1.json") as f:
