@@ -1,4 +1,6 @@
 import json
+import os
+
 
 class Classes:
     def __init__(self):
@@ -6,17 +8,23 @@ class Classes:
 
     def get_class_names(self):
         d = []
-        with open("python/classes/class1.json") as f:
-            data = json.load(f)
-            d.append(data['name'])
+        directories = "python/classes/"
+        json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
+        for a in json_names:
+            with open(f"{directories}{a}") as f:
+                data = json.load(f)
+                d.append(data['name'])
         return d
 
     def get_class(self,name):
         d = []
-        with open ("python/classes/class1.json") as f:
-            data = json.load(f)
-            if data["name"] == name:
-                d.append(data)
+        directories = "python/classes/"
+        json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
+        for a in json_names:
+            with open (f"{directories}{a}") as f:
+                data = json.load(f)
+                if data["name"] == name:
+                    d.append(data)
         return d
 
     def update_class(self,data, name):
