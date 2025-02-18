@@ -16,7 +16,7 @@ def get_names():
 @app.route("/api/update_class", methods=['POST'])
 def update_class():
     data = request.json
-    c.update_class(data, "class1.json")
+    c.update_class(data['list'], data['name'])
     return ""
 
 if __name__ == '__main__':

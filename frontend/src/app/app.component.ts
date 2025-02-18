@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {TestServiceService} from './test-service.service';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   dataClass: any;
   studentList: any;
   namesList : any;
+  attendanceList: any = [];
   constructor(private testService: TestServiceService) {
 
   }
@@ -25,6 +26,16 @@ export class AppComponent implements OnInit{
         this.namesList = this.testService.getNames();
     })
 
+  }
+
+  addElement(event:any){
+    this.attendanceList.push(event.target.value);
+  }
+
+  sendAttendance(){
+    this.testService.sendAttendance(this.attendanceList).subscribe(data => {
+      console.log("success");
+    });
   }
 
   setClass(x: any){

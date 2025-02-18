@@ -16,9 +16,10 @@
     <div *ngIf="studentList">
        <ul>
         <li *ngFor="let item of studentList">
-          {{item}} <input type="text" className="attendanceInput" style="width:2%;" />
+          {{item}} <input type="text" className="attendanceInput" style="width:2%;" (change)="addElement($event)"/>
         </li>
       </ul>
+      <button style="position:absolute;" (click)="sendAttendance()">Send Attendance</button>
     </div>
 
      <div *ngIf="namesList">

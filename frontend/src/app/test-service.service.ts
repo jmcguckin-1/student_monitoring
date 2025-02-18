@@ -40,6 +40,11 @@ export class TestServiceService {
     return this.http.get<any>('/api/get_class', this.options);
 }
 
+sendAttendance(x:any): Observable<any> {
+    this.options = { list: x, name: this.className };
+    return this.http.post<any>('/api/update_class', this.options);
+}
+
  fetchNames(): Observable<any> {
     return this.http.get<any>('/api/get_names');
 }

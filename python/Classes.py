@@ -27,13 +27,19 @@ class Classes:
                     d.append(data)
         return d
 
-    def update_class(self,data, name):
+    def update_class(self, attendance, name):
         d = []
-        with open(f"python/classes/{name}") as f:
-            old_data = json.load(f)
-            old_data.update({"attendance": data["attendance"]})
-            d = old_data
-        f1 = open("python/classes/class1.json", "w")
+        directories = "python/classes/"
+        json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
+        file = ""
+        for b in json_names:
+             with open(f"{directories}{b}") as f:
+                old_data = json.load(f)
+                if old_data["name"] == name:
+                    old_data.update({"attendance": attendance})
+                    d = old_data
+                    file = b
+        f1 = open(f"{directories}{file}", "w")
         f1.write(json.dumps(d, indent=4))
         f1.close()
 
