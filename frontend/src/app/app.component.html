@@ -1,8 +1,35 @@
-<main class="main">
+<main class="main" xmlns:position="http://www.w3.org/1999/xhtml">
   <div class="content">
     <div class="left-side">
       <h1>Student App</h1>
       <p>Angular in Session</p>
     </div>
+
+    <div *ngIf="dataClass">
+      <ul>
+        <li *ngFor="let item of dataClass">
+          {{item.name}}
+           {{item.date}}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="studentList">
+       <ul>
+        <li *ngFor="let item of studentList">
+          {{item}} <input type="text" className="attendanceInput" style="width:2%;" (change)="addElement($event)"/>
+        </li>
+      </ul>
+      <button style="position:absolute;" (click)="sendAttendance()">Send Attendance</button>
+    </div>
+
+     <div *ngIf="namesList">
+       <select #classReg>
+        <option *ngFor="let item of namesList" [value]="item">
+          {{item}}
+        </option>
+      </select>
+       <button (click)="setClass(classReg.value)" style="position:absolute;">Grab Class</button>
+    </div>
+
   </div>
 </main>

@@ -1,0 +1,14 @@
+{
+    "name": "14It1",
+    "students": [
+        "John",
+        "Erik",
+        "Deivis"
+    ],
+    "attendance": [
+        "A",
+        "S",
+        "P"
+    ],
+    "date": "12-05-2025"
+}
