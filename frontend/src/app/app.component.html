@@ -29,6 +29,17 @@
         </option>
       </select>
        <button (click)="setClass(classReg.value)" style="position:absolute;">Grab Class</button>
+       <button (click)="getReport()" style="position:absolute; top:40%;">Get report</button>
+    </div>
+
+     <div *ngIf="report">
+       <div *ngFor="let item of report">
+        <p>{{item.name}}</p>
+         <p>{{item.percent}}</p>
+         <p>{{item.sick}} sick days</p>
+         <p>{{item.absent}} no show days</p>
+
+       </div>
     </div>
 
   </div>

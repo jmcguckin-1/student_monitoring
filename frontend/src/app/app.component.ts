@@ -16,16 +16,15 @@ export class AppComponent implements OnInit{
   studentList: any;
   namesList : any;
   attendanceList: any = [];
+  report: any = [];
   constructor(private testService: TestServiceService) {
 
   }
   ngOnInit(): void {
-
     this.testService.fetchNames().subscribe(data => {
         this.testService.setNames(data);
         this.namesList = this.testService.getNames();
     })
-
   }
 
   addElement(event:any){
@@ -36,6 +35,13 @@ export class AppComponent implements OnInit{
     this.testService.sendAttendance(this.attendanceList).subscribe(data => {
       console.log("success");
     });
+  }
+
+  getReport(){
+    this.testService.fetchReport().subscribe(data => {
+       this.testService.setReport(data);
+       this.report = this.testService.getReport();
+    })
   }
 
   setClass(x: any){

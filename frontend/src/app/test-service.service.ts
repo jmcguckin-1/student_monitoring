@@ -11,6 +11,7 @@ export class TestServiceService {
   private classData = [];
   private nameData = [];
   private className = "";
+  private report = [];
   options: any;
   setData (x: any){
     this.classData = x;
@@ -28,6 +29,14 @@ export class TestServiceService {
     this.nameData = x;
   }
 
+  setReport(x:any){
+    this.report = x;
+  }
+
+  getReport(){
+    return this.report;
+  }
+
    setClass(x:any){
     this.className = x;
     this.options = { params: new HttpParams().set('name', this.className) };
@@ -38,6 +47,11 @@ export class TestServiceService {
   }
  fetchClassData(): Observable<any> {
     return this.http.get<any>('/api/get_class', this.options);
+}
+
+ fetchReport(): Observable<any> {
+    this.options = { params: new HttpParams().set('name', "John") };
+    return this.http.get<any>('/api/get_attendance_file', this.options);
 }
 
 sendAttendance(x:any): Observable<any> {
