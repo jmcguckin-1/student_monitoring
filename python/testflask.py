@@ -23,7 +23,9 @@ def update_class():
 
 @app.route("/api/create_file")
 def create_file():
-    c.create_attendance_file("12dfercMa1")
+    name = request.args.get("name")
+    class_name = request.args.get("class_name")
+    c.create_attendance_file(class_name, name)
     return ""
 
 @app.route("/api/get_attendance_file")

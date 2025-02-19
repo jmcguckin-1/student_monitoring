@@ -27,10 +27,9 @@ class Classes:
                     d.append(data)
         return d
 
-    def create_attendance_file(self, class_name):
+    def create_attendance_file(self, class_name, name):
         directories = "python/classes/"
         json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
-        name = ""
         length = 0
         days = 0
         sick_days = 0
@@ -40,14 +39,15 @@ class Classes:
                 data = json.load(f)
                 if data["name"] == class_name:
                     length += 1
-                    name = data["students"][0]
-                    if data["attendance"][0] == "P":
-                        days += 1
-                    if data["attendance"][0] == "S":
-                        sick_days += 1
-                    if data["attendance"][0] == "A":
-                        absent_days += 1
-        d = {"name": name, "percent": str(days / length * 100) + "%", "sick": sick_days, "absent": absent_days}
+                    if name in data["students"]:
+                        ind = data["students"].index(name)
+                        if data["attendance"][ind] == "P":
+                            days += 1
+                        if data["attendance"][ind] == "S":
+                            sick_days += 1
+                        if data["attendance"][ind] == "A":
+                            absent_days += 1
+        d = {"name": name, "percent": str(days / length * 100) + "%", "class_name": class_name, "sick": sick_days, "absent": absent_days}
         f1 = open(f"python/attendance/{name}_{class_name}_attendance.json", "w")
         f1.write(json.dumps(d, indent=4))
         f1.close()
