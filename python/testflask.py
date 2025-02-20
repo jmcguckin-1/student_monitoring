@@ -27,11 +27,11 @@ def get_file():
     class_name = request.args.get("class_name")
     return a.get_attendance(name, class_name)
 
-@app.route("/api/add_behaviour")
+@app.route("/api/add_behaviour", methods=['POST'])
 def add_behaviour():
-    behaviour = request.args.get("behaviour")
-    comments = request.args.get("comments")
-    return a.get_attendance(name, class_name)
+    data = request.json
+    a.add_behaviour(data['behaviour'], data['comments'], data['class_name'], data['date'])
+    return ""
 
 if __name__ == '__main__':
     app.run()

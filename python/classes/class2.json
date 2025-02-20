@@ -7,9 +7,18 @@
     ],
     "attendance": [
         "S",
-        "A",
         "S",
-        "P"
+        "S"
     ],
-    "date": "12-05-2025"
+    "date": "12-05-2025",
+    "behaviour": [
+        "M",
+        "C",
+        "SV"
+    ],
+    "comments": [
+        "Talked too much today",
+        "Too many Kali Linux windows open",
+        "Stole a child's test and cheated"
+    ]
 }

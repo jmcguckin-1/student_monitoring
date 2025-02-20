@@ -21,5 +21,21 @@ class Attendance:
         return final_data
 
 
-    def add_behaviour(self, behaviour, comments):
-        pass
+    def add_behaviour(self, behaviour, comments, class_name, date):
+        directory = "python/classes/"
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        d = []
+        file = ""
+        for j in json_names:
+            with open(f"{directory}{j}") as json_file:
+                data = json.load(json_file)
+                if data["name"] == class_name and data["date"] == date:
+                        data["behaviour"] = behaviour
+                        file = j
+                        data["comments"] = comments
+                        d = data
+        f1 = open(f"{directory}{file}", "w")
+        f1.write(json.dumps(d, indent=4))
+        f1.close()
+
+

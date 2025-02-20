@@ -69,4 +69,10 @@ sendAttendance(x:any): Observable<any> {
  fetchNames(): Observable<any> {
     return this.http.get<any>('/api/get_names');
 }
+
+addBehaviour(behaviour:any ,comments:any): Observable<any>{
+    this.options = { class_name: this.className, behaviour: behaviour,
+      comments: comments, date: this.classData[0]['date'] };
+    return this.http.post<any>("/api/add_behaviour", this.options);
+}
 }

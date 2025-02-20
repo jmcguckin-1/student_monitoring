@@ -45,10 +45,16 @@ export class AppComponent implements OnInit{
     this.attendanceList = x;
   }
 
+  sendBehaviour(){
+    this.testService.addBehaviour(this.behaviourType, this.commentList).subscribe(data => {
+      console.log("behaviour added");
+    })
+  }
+
   sendAttendance(){
     this.testService.sendAttendance(this.attendanceList).subscribe(data => {
-      console.log("success");
       this.setAttendanceList([]);
+      this.sendBehaviour();
     });
   }
 
