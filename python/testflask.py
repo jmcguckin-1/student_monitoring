@@ -21,17 +21,11 @@ def update_class():
     c.update_class(data['list'], data['name'])
     return ""
 
-@app.route("/api/create_file")
-def create_file():
-    name = request.args.get("name")
-    class_name = request.args.get("class_name")
-    c.create_attendance_file(class_name, name)
-    return ""
-
 @app.route("/api/get_attendance_file")
 def get_file():
     name = request.args.get("name")
-    return a.get_attendance(name)
+    class_name = request.args.get("class_name")
+    return a.get_attendance(name, class_name)
 
 if __name__ == '__main__':
     app.run()

@@ -13,7 +13,8 @@ class Classes:
         for a in json_names:
             with open(f"{directories}{a}") as f:
                 data = json.load(f)
-                d.append(data['name'])
+                if data["name"] not in d:
+                    d.append(data['name'])
         return d
 
     def get_class(self,name):

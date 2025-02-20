@@ -12,6 +12,7 @@ export class TestServiceService {
   private nameData = [];
   private className = "";
   private report = [];
+  private chosenStudent = "";
   options: any;
   setData (x: any){
     this.classData = x;
@@ -42,6 +43,10 @@ export class TestServiceService {
     this.options = { params: new HttpParams().set('name', this.className) };
   }
 
+  setStudent(x:any){
+    this.chosenStudent = x;
+  }
+
   getStudentData(){
     return this.classData[0]['students'];
   }
@@ -50,7 +55,9 @@ export class TestServiceService {
 }
 
  fetchReport(): Observable<any> {
-    this.options = { params: new HttpParams().set('name', "John") };
+    this.options = { params: new HttpParams()
+        .set('name', this.chosenStudent)
+        .set('class_name', this.className)};
     return this.http.get<any>('/api/get_attendance_file', this.options);
 }
 

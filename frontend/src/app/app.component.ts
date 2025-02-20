@@ -53,6 +53,10 @@ export class AppComponent implements OnInit{
       }
     )
   }
+
+  setStudent(x:any){
+    this.testService.setStudent(x);
+  }
   title = 'frontend';
 
 

@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+#studentReports{
+  position:absolute;
+  right:20%;
+}
+
+#selectClass{
+  position:absolute;
+  left:10%;
+}
+
+#attendance{
+  position:absolute;
+  left:30%;
+  top:40%;
+}
+
+#report{
+  position:absolute;
+  right:20%;
+  top:45%;
+}

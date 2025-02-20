@@ -13,7 +13,7 @@
         </li>
       </ul>
     </div>
-    <div *ngIf="studentList">
+    <div *ngIf="studentList" id="attendance">
        <ul>
         <li *ngFor="let item of studentList">
           {{item}} <input type="text" className="attendanceInput" style="width:2%;" (change)="addElement($event)"/>
@@ -22,24 +22,31 @@
       <button style="position:absolute;" (click)="sendAttendance()">Send Attendance</button>
     </div>
 
-     <div *ngIf="namesList">
+     <div *ngIf="namesList" id="selectClass">
        <select #classReg>
         <option *ngFor="let item of namesList" [value]="item">
           {{item}}
         </option>
       </select>
-       <button (click)="setClass(classReg.value)" style="position:absolute;">Grab Class</button>
-       <button (click)="getReport()" style="position:absolute; top:40%;">Get report</button>
+       <button (click)="setClass(classReg.value)">Grab Class</button>
     </div>
 
-     <div *ngIf="report">
+     <div *ngIf="report" id="report">
        <div *ngFor="let item of report">
         <p>{{item.name}}</p>
          <p>{{item.percent}}</p>
          <p>{{item.sick}} sick days</p>
          <p>{{item.absent}} no show days</p>
-
        </div>
+    </div>
+
+    <div *ngIf="studentList" id="studentReports">
+       <select #studentName (change)="setStudent(studentName.value)">
+        <option *ngFor="let item of studentList" [value]="item">
+          {{item}}
+        </option>
+      </select>
+     <button (click)="getReport()">Get report</button>
     </div>
 
   </div>
