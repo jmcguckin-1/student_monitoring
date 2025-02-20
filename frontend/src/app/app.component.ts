@@ -16,6 +16,8 @@ export class AppComponent implements OnInit{
   studentList: any;
   namesList : any;
   attendanceList: any = [];
+  commentList: any = [];
+  behaviourType: any = [];
   report: any = [];
   constructor(private testService: TestServiceService) {
 
@@ -27,13 +29,26 @@ export class AppComponent implements OnInit{
     })
   }
 
-  addElement(event:any){
-    this.attendanceList.push(event.target.value);
+  addElement(x:any){
+    this.attendanceList.push(x);
+  }
+
+  setCommentList(x:any){
+    this.commentList.push(x);
+  }
+
+   setBehaviourType(x:any){
+    this.behaviourType.push(x);
+  }
+
+  setAttendanceList(x:any){
+    this.attendanceList = x;
   }
 
   sendAttendance(){
     this.testService.sendAttendance(this.attendanceList).subscribe(data => {
       console.log("success");
+      this.setAttendanceList([]);
     });
   }
 

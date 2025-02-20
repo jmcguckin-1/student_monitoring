@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 #studentReports{
   position:absolute;
-  right:20%;
+  right:6%;
 }
 
 #selectClass{
@@ -12,11 +12,12 @@
 #attendance{
   position:absolute;
   left:30%;
-  top:40%;
+  top:20%;
+  font-size:22px;
 }
 
 #report{
   position:absolute;
-  right:20%;
-  top:45%;
+  right:10%;
+  top:27%;
 }

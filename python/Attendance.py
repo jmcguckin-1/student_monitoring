@@ -19,3 +19,7 @@ class Attendance:
                         final_data.append(data)
 
         return final_data
+
+
+    def add_behaviour(self, behaviour, comments):
+        pass

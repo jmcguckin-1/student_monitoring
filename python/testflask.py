@@ -27,5 +27,11 @@ def get_file():
     class_name = request.args.get("class_name")
     return a.get_attendance(name, class_name)
 
+@app.route("/api/add_behaviour")
+def add_behaviour():
+    behaviour = request.args.get("behaviour")
+    comments = request.args.get("comments")
+    return a.get_attendance(name, class_name)
+
 if __name__ == '__main__':
     app.run()
