@@ -33,5 +33,12 @@ def add_behaviour():
     a.add_behaviour(data['behaviour'], data['comments'], data['class_name'], data['date'])
     return ""
 
+@app.route("/api/get_behaviour_file")
+def get_behaviour_file():
+    class_name = request.args.get("class_name")
+    name = request.args.get("name")
+    a.create_behaviour_file(name, class_name)
+    return ""
+
 if __name__ == '__main__':
     app.run()

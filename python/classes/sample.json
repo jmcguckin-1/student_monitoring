@@ -1,14 +1,24 @@
 {
-    "name": "12dfercMa1",
+    "name": "14It1",
     "students": [
         "John",
-        "Daniel",
-        "Paul"
+        "Erik",
+        "Deivis"
     ],
-    "attendance": [
-        "A",
-        "S",
-        "P"
-    ],
-    "date": "13-05-2025"
+    "attendance": {
+        "John": "P",
+        "Erik": "A",
+        "Deivis": "S"
+    },
+    "date": "13-05-2025",
+    "behaviour": {
+        "John": "M",
+        "Erik": "C",
+        "Deivis": "SV"
+    },
+    "comments": {
+        "John": "Talking Way too Much",
+        "Erik": "Okay so he's missed a lot of class",
+        "Deivis": "been a cheeky boy"
+    }
 }
