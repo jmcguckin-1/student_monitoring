@@ -6,17 +6,19 @@
         "Deivis"
     ],
     "attendance": {
-        "John": "S"
+        "John": "P",
+        "Erik": "A",
+        "Deivis": "S"
     },
     "date": "12-05-2025",
     "behaviour": {
         "John": "M",
-        "Erik": "M",
-        "Deivis": "M"
+        "Erik": "C",
+        "Deivis": "C"
     },
     "comments": {
-        "John": "",
-        "Erik": "",
-        "Deivis": ""
+        "John": "Talking Way too Much",
+        "Erik": "Okay so he's missed a lot of class",
+        "Deivis": "Probably drank too much bpm"
     }
 }

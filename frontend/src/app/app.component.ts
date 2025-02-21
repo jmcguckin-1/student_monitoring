@@ -31,11 +31,17 @@ export class AppComponent implements OnInit{
   }
 
   createDefaults(data:any){
+    let aList: any = {};
+    let cList: any = {};
+    let bType: any = {};
     for (let i=0; i<data.length; i++){
-      this.attendanceList[data[i]] = "P";
-      this.commentList[data[i]] = "";
-      this.behaviourType[data[i]] = "M";
+      aList[data[i]] = "P";
+      cList[data[i]] = "";
+      bType[data[i]] = "M";
     }
+    this.setAttendanceList(aList);
+    this.setBehaviourList(bType);
+    this.setCommentList(cList);
   }
 
   addElement(x:any, name:any){
@@ -44,13 +50,21 @@ export class AppComponent implements OnInit{
     }
   }
 
-  setCommentList(x:any, name:any){
+  setCommentList (x:any){
+    this.commentList = x;
+  }
+
+  setBehaviourList (x:any){
+    this.behaviourType = x;
+  }
+
+  updateCommentList(x:any, name:any){
      if (Object.keys(this.commentList).length <= this.studentLength){
         this.commentList[name] = x;
     }
   }
 
-   setBehaviourType(x:any, name:any){
+   updateBehaviourType(x:any, name:any){
      if (Object.keys(this.behaviourType).length <= this.studentLength) {
        this.behaviourType[name] = x;
      }
@@ -68,7 +82,6 @@ export class AppComponent implements OnInit{
 
   sendAttendance(){
     this.testService.sendAttendance(this.attendanceList).subscribe(data => {
-      this.setAttendanceList({});
       this.sendBehaviour();
     });
   }
