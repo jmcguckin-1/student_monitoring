@@ -15,9 +15,10 @@ export class AppComponent implements OnInit{
   dataClass: any;
   studentList: any;
   namesList : any;
-  attendanceList: any = [];
-  commentList: any = [];
-  behaviourType: any = [];
+  attendanceList : any = {};
+  commentList: any = {};
+  behaviourType: any = {};
+  studentLength: any;
   report: any = [];
   constructor(private testService: TestServiceService) {
 
@@ -29,20 +30,34 @@ export class AppComponent implements OnInit{
     })
   }
 
-  addElement(x:any){
-    this.attendanceList.push(x);
+  createDefaults(data:any){
+    for (let i=0; i<data.length; i++){
+      this.attendanceList[data[i]] = "P";
+      this.commentList[data[i]] = "";
+      this.behaviourType[data[i]] = "M";
+    }
   }
 
-  setCommentList(x:any){
-    this.commentList.push(x);
+  addElement(x:any, name:any){
+    if (Object.keys(this.attendanceList).length <= this.studentLength){
+        this.attendanceList[name] = x;
+    }
   }
 
-   setBehaviourType(x:any){
-    this.behaviourType.push(x);
+  setCommentList(x:any, name:any){
+     if (Object.keys(this.commentList).length <= this.studentLength){
+        this.commentList[name] = x;
+    }
+  }
+
+   setBehaviourType(x:any, name:any){
+     if (Object.keys(this.behaviourType).length <= this.studentLength) {
+       this.behaviourType[name] = x;
+     }
   }
 
   setAttendanceList(x:any){
-    this.attendanceList = x;
+       this.attendanceList = x;
   }
 
   sendBehaviour(){
@@ -53,7 +68,7 @@ export class AppComponent implements OnInit{
 
   sendAttendance(){
     this.testService.sendAttendance(this.attendanceList).subscribe(data => {
-      this.setAttendanceList([]);
+      this.setAttendanceList({});
       this.sendBehaviour();
     });
   }
@@ -71,6 +86,9 @@ export class AppComponent implements OnInit{
         this.testService.setData(data);
         this.dataClass = this.testService.getData();
         this.studentList = this.testService.getStudentData();
+        this.createDefaults(this.studentList);
+        this.testService.setStudent(this.studentList[0]);
+        this.studentLength = this.studentList.length;
       }
     )
   }

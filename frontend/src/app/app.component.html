@@ -17,17 +17,17 @@
        <ul>
         <li *ngFor="let item of studentList">
           {{item}}
-          <select #attending (change)="addElement(attending.value)">
+          <select #attending (change)="addElement(attending.value, item)">
           <option value="P">P (Present)</option>
           <option value="S">S (Sick)</option>
           <option value="A">A (Absent)</option>
         </select>
-           <select #behaviourType (change)="setBehaviourType(behaviourType.value)" style="position:absolute; margin-left:20%;">
+           <select #behaviourType (change)="setBehaviourType(behaviourType.value, item)" style="position:absolute; margin-left:20%;">
              <option value="M">Minor Grievance</option>
           <option value="C">Concerning Behaviour</option>
           <option value="SV">Severe Behaviour</option>
         </select>
-          <input #comments (change)="setCommentList(comments.value)" style="position:absolute; margin-left:80%;" />
+          <input #comments (change)="setCommentList(comments.value, item)" style="position:absolute; margin-left:80%;" />
         </li>
       </ul>
       <button style="position:absolute;" (click)="sendAttendance()">Send Attendance</button>

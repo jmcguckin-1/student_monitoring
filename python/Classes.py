@@ -41,12 +41,11 @@ class Classes:
                 if data["name"] == class_name:
                     length += 1
                     if name in data["students"]:
-                        ind = data["students"].index(name)
-                        if data["attendance"][ind] == "P":
+                        if data["attendance"][name] == "P":
                             days += 1
-                        if data["attendance"][ind] == "S":
+                        if data["attendance"][name] == "S":
                             sick_days += 1
-                        if data["attendance"][ind] == "A":
+                        if data["attendance"][name] == "A":
                             absent_days += 1
         d = {"name": name, "percent": str(days / length * 100) + "%", "class_name": class_name, "sick": sick_days, "absent": absent_days}
         f1 = open(f"python/attendance/{name}_{class_name}_attendance.json", "w")
