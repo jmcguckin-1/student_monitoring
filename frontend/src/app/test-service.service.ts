@@ -61,6 +61,13 @@ export class TestServiceService {
     return this.http.get<any>('/api/get_attendance_file', this.options);
 }
 
+ fetchBehaviourReport(): Observable<any> {
+    this.options = { params: new HttpParams()
+        .set('name', this.chosenStudent)
+        .set('class_name', this.className)};
+    return this.http.get<any>('/api/get_behaviour_file', this.options);
+}
+
 sendAttendance(x:any): Observable<any> {
     this.options = { list: x, name: this.className };
     return this.http.post<any>('/api/update_class', this.options);

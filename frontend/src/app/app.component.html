@@ -60,5 +60,26 @@
      <button (click)="getReport()">Get overall attendance report</button>
     </div>
 
+
+     <div *ngIf="behaviourReport" id="report2">
+       <div *ngFor="let item of behaviourReport">
+        <p>{{item.name}}</p>
+         <p>{{item.minor_count}} minor offences</p>
+         <p>{{item.concerning_count}} concerning offences</p>
+         <p>{{item.severe_count}} severe offences</p>
+         <p>sample comments: {{item.comments}}</p>
+         <p>{{item.status}}</p>
+       </div>
+    </div>
+
+    <div *ngIf="studentList" id="studentBehaviourReports">
+       <select #studentName (change)="setStudent(studentName.value)">
+        <option *ngFor="let item of studentList" [value]="item">
+          {{item}}
+        </option>
+      </select>
+     <button (click)="getBehaviourReport()">Get overall behaviour report</button>
+    </div>
+
   </div>
 </main>

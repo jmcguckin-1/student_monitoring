@@ -4,6 +4,12 @@
   right:6%;
 }
 
+#studentBehaviourReports{
+  position:absolute;
+  right:3%;
+  top:40%;
+}
+
 #selectClass{
   position:absolute;
   left:10%;
@@ -19,5 +25,11 @@
 #report{
   position:absolute;
   right:10%;
-  top:27%;
+  top:25%;
+}
+
+#report2{
+  position:absolute;
+  right:10%;
+  top:50%;
 }

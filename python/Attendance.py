@@ -39,7 +39,7 @@ class Attendance:
         f1.close()
 
     def get_student_status(self, m, c, sv):
-        statuses = ["nothing to worry about", "student needs to improve their behaviour", "explusion is a real possibility. this student has shown consistent bad behaviour with no sign of stopping"]
+        statuses = ["nothing to worry about", "student needs to improve their behaviour", "expulsion is a real possibility. this student has shown consistent bad behaviour with no sign of stopping"]
         if sv >=2:
             return statuses[2]
         if c >= 3 or m > 3:
@@ -71,6 +71,19 @@ class Attendance:
         f1 = open(f"python/behaviour/{name}_{class_name}_behaviour.json", "w")
         f1.write(json.dumps(new_file_data, indent=4))
         f1.close()
+
+
+    def get_b_file(self, class_name, name):
+        directory = "python/behaviour/"
+        self.create_behaviour_file(name, class_name)
+        return_data = []
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for a in json_names:
+            with open(f"{directory}{a}") as json_file:
+                data = json.load(json_file)
+                if data["class_name"] == class_name and name == data["name"]:
+                    return_data.append(data)
+        return return_data
 
 
 

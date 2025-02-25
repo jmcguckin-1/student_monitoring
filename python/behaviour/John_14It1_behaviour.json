@@ -1,9 +1,12 @@
 {
     "name": "John",
     "class_name": "14It1",
-    "minor_count": 1,
+    "minor_count": 2,
     "severe_count": 0,
     "concerning_count": 0,
-    "comments": "Talking Way too Much",
+    "comments": [
+        "Talking Way too Much",
+        "Talking Way too Much"
+    ],
     "status": "nothing to worry about"
 }

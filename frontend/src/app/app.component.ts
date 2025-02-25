@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
   behaviourType: any = {};
   studentLength: any;
   report: any = [];
+  behaviourReport: any = [];
   constructor(private testService: TestServiceService) {
 
   }
@@ -58,6 +59,10 @@ export class AppComponent implements OnInit{
     this.behaviourType = x;
   }
 
+  setBehaviourReport(a: any){
+    this.behaviourReport = a;
+  }
+
   updateCommentList(x:any, name:any){
      if (Object.keys(this.commentList).length <= this.studentLength){
         this.commentList[name] = x;
@@ -90,6 +95,12 @@ export class AppComponent implements OnInit{
     this.testService.fetchReport().subscribe(data => {
        this.testService.setReport(data);
        this.report = this.testService.getReport();
+    })
+  }
+
+  getBehaviourReport(){
+    this.testService.fetchBehaviourReport().subscribe(data => {
+        this.setBehaviourReport(data);
     })
   }
 

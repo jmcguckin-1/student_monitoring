@@ -37,8 +37,7 @@ def add_behaviour():
 def get_behaviour_file():
     class_name = request.args.get("class_name")
     name = request.args.get("name")
-    a.create_behaviour_file(name, class_name)
-    return ""
+    return a.get_b_file(class_name, name)
 
 if __name__ == '__main__':
     app.run()
