@@ -33,3 +33,26 @@
   right:10%;
   top:50%;
 }
+
+*{
+  background-color: #72A0C1;
+  color:white;
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+ul li{
+  list-style-type: none;
+}
+
+button{
+  background-color: white;
+  color:black;
+}
+
+input, select{
+  color:gray;
+  background-color: white;
+}

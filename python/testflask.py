@@ -1,11 +1,12 @@
 from Classes import *
 from flask import Flask, request
 from Attendance import *
+from Grades import *
 
 app = Flask(__name__)
 c = Classes()
 a = Attendance()
-
+g = Grades()
 @app.route("/api/get_class")
 def get_class():
     name = request.args.get("name")
@@ -38,6 +39,12 @@ def get_behaviour_file():
     class_name = request.args.get("class_name")
     name = request.args.get("name")
     return a.get_b_file(class_name, name)
+
+@app.route("/api/get_grade")
+def get_grade():
+    class_name = request.args.get("class_name")
+    name = request.args.get("name")
+    return str(g.get_average_grade(name, class_name))
 
 if __name__ == '__main__':
     app.run()

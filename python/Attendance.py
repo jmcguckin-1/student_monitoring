@@ -86,4 +86,15 @@ class Attendance:
         return return_data
 
 
+    def generate_full_report(self, student_name, grades, comments):
+        directory = "python/reports/"
+        if len(grades) != len(comments):
+            raise ValueError("grades and comments must be the same length")
+        data = [{"student_name": student_name}]
+        for i in range(0, len(grades)):
+            d = { "grade": grades[i], "comments": comments[i]}
+            data.append(d)
 
+        f1 = open(f"{directory}_{student_name}_report.json", "w")
+        f1.write(json.dumps(data, indent=4))
+        f1.close()
