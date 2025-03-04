@@ -17,6 +17,7 @@ class Classes:
                     d.append(data['name'])
         return d
 
+
     def get_class(self,name):
         d = []
         directories = "python/classes/"
@@ -27,6 +28,7 @@ class Classes:
                 if data["name"] == name:
                     d.append(data)
         return d
+
 
     def create_attendance_file(self, class_name, name):
         directories = "python/classes/"
@@ -68,4 +70,3 @@ class Classes:
         f1 = open(f"{directories}{file}", "w")
         f1.write(json.dumps(d, indent=4))
         f1.close()
-

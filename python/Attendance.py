@@ -18,7 +18,6 @@ class Attendance:
                 if data["class_name"] == class_name:
                     if data["name"] == name:
                         final_data.append(data)
-
         return final_data
 
 
@@ -38,6 +37,7 @@ class Attendance:
         f1 = open(f"{directory}{file}", "w")
         f1.write(json.dumps(d, indent=4))
         f1.close()
+
 
     def get_student_status(self, m, c, sv):
         statuses = ["nothing to worry about", "student needs to improve their behaviour", "expulsion is a real possibility. this student has shown consistent bad behaviour with no sign of stopping"]
@@ -86,12 +86,14 @@ class Attendance:
                     return_data.append(data)
         return return_data
 
+
     def store_student_class_comment(self, comment, student, class_name):
         directory = "python/comments/"
         d = {"comment": comment, "student": student, "class_name": class_name}
         f1 = open(f"{directory}{student}_{class_name}_comments.json", "w")
         f1.write(json.dumps(d, indent=4))
         f1.close()
+
 
     def get_student_comments(self, student):
         directory = "python/comments/"
@@ -104,18 +106,17 @@ class Attendance:
                     return_data.append(data['comment'])
         return return_data
 
+
     def generate_full_report(self, student_name):
         directory = "python/reports/"
         g = Grades()
         grades = g.get_student_grades(student_name)
         comments = self.get_student_comments(student_name)
         data = [{"student_name": student_name}]
-        print(grades)
-        print(comments)
         for i in range(0, len(grades)):
             d = {"grade": grades[i], "comments": comments[i]}
             data.append(d)
 
-        f1 = open(f"{directory}_{student_name}_report.json", "w")
+        f1 = open(f"{directory}{student_name}_report.json", "w")
         f1.write(json.dumps(data, indent=4))
         f1.close()
