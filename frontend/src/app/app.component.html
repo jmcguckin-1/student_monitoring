@@ -81,5 +81,14 @@
      <button (click)="getBehaviourReport()">Get overall behaviour report</button>
     </div>
 
+    <div id='finalComments'>
+      <p>Current Student: {{getCurrentStudent()}}</p>
+      <p>Enter overall student comments for this class</p>
+      <textarea #studentComment (change)="setComment(studentComment.value)">
+      </textarea>
+      <br/>
+      <button (click)="addComment()">Add Comment to final report</button>
+    </div>
+
   </div>
 </main>

@@ -51,6 +51,20 @@ export class AppComponent implements OnInit{
     }
   }
 
+  setComment(x:any){
+    this.testService.setComment(x);
+  }
+
+  addComment(){
+    this.testService.addComment().subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  getCurrentStudent(){
+    return this.testService.getCurrentStudent();
+  }
+
   setCommentList (x:any){
     this.commentList = x;
   }

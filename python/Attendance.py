@@ -1,5 +1,6 @@
 import os, json
 from Classes import *
+from Grades import *
 class Attendance:
 
     def __init__(self):
@@ -85,14 +86,34 @@ class Attendance:
                     return_data.append(data)
         return return_data
 
+    def store_student_class_comment(self, comment, student, class_name):
+        directory = "python/comments/"
+        d = {"comment": comment, "student": student, "class_name": class_name}
+        f1 = open(f"{directory}{student}_{class_name}_comments.json", "w")
+        f1.write(json.dumps(d, indent=4))
+        f1.close()
 
-    def generate_full_report(self, student_name, grades, comments):
+    def get_student_comments(self, student):
+        directory = "python/comments/"
+        return_data = []
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for a in json_names:
+            with open(f"{directory}{a}") as json_file:
+                data = json.load(json_file)
+                if student == data["student"]:
+                    return_data.append(data['comment'])
+        return return_data
+
+    def generate_full_report(self, student_name):
         directory = "python/reports/"
-        if len(grades) != len(comments):
-            raise ValueError("grades and comments must be the same length")
+        g = Grades()
+        grades = g.get_student_grades(student_name)
+        comments = self.get_student_comments(student_name)
         data = [{"student_name": student_name}]
+        print(grades)
+        print(comments)
         for i in range(0, len(grades)):
-            d = { "grade": grades[i], "comments": comments[i]}
+            d = {"grade": grades[i], "comments": comments[i]}
             data.append(d)
 
         f1 = open(f"{directory}_{student_name}_report.json", "w")

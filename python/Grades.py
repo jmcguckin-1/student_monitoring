@@ -1,6 +1,5 @@
 import json, os
 
-
 class Grades:
 
     def __init__(self):
@@ -25,3 +24,14 @@ class Grades:
         f = open(f"{directory}{assignment}_{student}_{class_name}.json", "w")
         f.write(json.dumps(d))
         f.close()
+
+    def get_student_grades(self, student):
+        directory = "python/assignments/"
+        return_data = []
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for a in json_names:
+            with open(f"{directory}{a}") as json_file:
+                data = json.load(json_file)
+                if student == data["student"]:
+                    return_data.append(self.get_average_grade(data["student"], data["class_name"]))
+        return return_data

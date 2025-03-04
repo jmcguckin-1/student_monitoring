@@ -40,11 +40,23 @@ def get_behaviour_file():
     name = request.args.get("name")
     return a.get_b_file(class_name, name)
 
+@app.route("/api/gen_report")
+def generate_full_report():
+    name = request.args.get("name")
+    a.generate_full_report(name)
+    return ""
+
 @app.route("/api/get_grade")
 def get_grade():
     class_name = request.args.get("class_name")
     name = request.args.get("name")
     return str(g.get_average_grade(name, class_name))
+
+@app.route("/api/add_comment", methods=['POST'])
+def add_comment():
+    data = request.json
+    a.store_student_class_comment(data['comment'], data['name'], data['class_name'])
+    return ""
 
 if __name__ == '__main__':
     app.run()

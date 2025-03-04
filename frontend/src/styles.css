@@ -56,3 +56,17 @@ input, select{
   color:gray;
   background-color: white;
 }
+
+#finalComments{
+  position:absolute;
+  right:10%;
+  bottom:20%;
+}
+
+#finalComments textarea{
+  background-color: white;
+  font-size:18px;
+  width:90%;
+  height:60%;
+  color:black;
+}

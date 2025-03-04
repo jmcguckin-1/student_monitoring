@@ -13,6 +13,7 @@ export class TestServiceService {
   private className = "";
   private report = [];
   private chosenStudent = "";
+  private currentComment = "";
   options: any;
   setData (x: any){
     this.classData = x;
@@ -20,6 +21,20 @@ export class TestServiceService {
 
   getData(){
     return this.classData;
+  }
+
+  setComment(x:any){
+    this.currentComment = x;
+  }
+
+  getCurrentStudent(){
+    return this.chosenStudent;
+  }
+
+  addComment(){
+        this.options = {name: this.chosenStudent, class_name: this.className, comment: this.currentComment};
+        console.log(this.options);
+    return this.http.post<any>('/api/add_comment', this.options);
   }
 
   getNames(){
