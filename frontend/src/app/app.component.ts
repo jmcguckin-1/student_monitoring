@@ -21,6 +21,8 @@ export class AppComponent implements OnInit{
   studentLength: any;
   report: any = [];
   behaviourReport: any = [];
+  studentReportName: any;
+  gradesList: any = [];
   constructor(private testService: TestServiceService) {
 
   }
@@ -53,6 +55,15 @@ export class AppComponent implements OnInit{
 
   setComment(x:any){
     this.testService.setComment(x);
+  }
+
+  getFullReport(){
+    this.testService.getFullReport().subscribe(data => {
+          this.testService.setFullReport(data);
+          this.gradesList = this.testService.getGradesCommentList();
+          this.studentReportName = this.testService.getStudentReportName();
+          console.log(this.studentReportName);
+    })
   }
 
   addComment(){

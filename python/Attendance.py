@@ -120,3 +120,14 @@ class Attendance:
         f1 = open(f"{directory}{student_name}_report.json", "w")
         f1.write(json.dumps(data, indent=4))
         f1.close()
+
+    def get_report(self, student_name):
+        directory = "python/reports/"
+        return_data = []
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for a in json_names:
+            with open(f"{directory}{a}") as json_file:
+                data = json.load(json_file)
+                if data[0]["student_name"] == student_name:
+                    return_data.append(data)
+        return return_data

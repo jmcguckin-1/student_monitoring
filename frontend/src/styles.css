@@ -70,3 +70,8 @@ input, select{
   height:60%;
   color:black;
 }
+
+#studentFinalReport{
+  position: absolute;
+  bottom:20%;
+}

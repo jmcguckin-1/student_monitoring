@@ -40,11 +40,10 @@ def get_behaviour_file():
     name = request.args.get("name")
     return a.get_b_file(class_name, name)
 
-@app.route("/api/gen_report")
-def generate_full_report():
+@app.route("/api/get_full_report")
+def get_full_report():
     name = request.args.get("name")
-    a.generate_full_report(name)
-    return ""
+    return a.get_report(name)
 
 @app.route("/api/get_grade")
 def get_grade():

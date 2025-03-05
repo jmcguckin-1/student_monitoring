@@ -51,16 +51,6 @@
        </div>
     </div>
 
-    <div *ngIf="studentList" id="studentReports">
-       <select #studentName (change)="setStudent(studentName.value)">
-        <option *ngFor="let item of studentList" [value]="item">
-          {{item}}
-        </option>
-      </select>
-     <button (click)="getReport()">Get overall attendance report</button>
-    </div>
-
-
      <div *ngIf="behaviourReport" id="report2">
        <div *ngFor="let item of behaviourReport">
         <p>{{item.name}}</p>
@@ -79,6 +69,20 @@
         </option>
       </select>
      <button (click)="getBehaviourReport()">Get overall behaviour report</button>
+      <button (click)="getReport()">Get overall attendance report</button>
+      <button (click)="getFullReport()">Get overall report</button>
+    </div>
+
+    <div *ngIf="gradesList" id="studentFinalReport">
+      <p>Name: {{studentReportName}}</p>
+      <table *ngFor="let item of gradesList">
+        <tr>
+          <td>{{item.grade.class}}</td>
+          <td>{{item.grade.grade}}</td>
+          <td>{{item.comments}}</td>
+        </tr>
+      </table>
+
     </div>
 
     <div id='finalComments'>

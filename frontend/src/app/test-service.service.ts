@@ -15,6 +15,7 @@ export class TestServiceService {
   private chosenStudent = "";
   private currentComment = "";
   options: any;
+  private fullReport = [];
   setData (x: any){
     this.classData = x;
   }
@@ -31,10 +32,26 @@ export class TestServiceService {
     return this.chosenStudent;
   }
 
+  getStudentReportName(){
+    return this.fullReport[0][0]["student_name"];
+  }
+
+  getGradesCommentList(){
+    let list : any = [];
+    for (let i=1; i<3; i++) {
+      list.push(this.fullReport[0][i]);
+    }
+    return list
+  }
+
   addComment(){
         this.options = {name: this.chosenStudent, class_name: this.className, comment: this.currentComment};
-        console.log(this.options);
-    return this.http.post<any>('/api/add_comment', this.options);
+        return this.http.post<any>('/api/add_comment', this.options);
+  }
+
+  getFullReport(){
+     this.options = { params: new HttpParams().set('name', this.chosenStudent) };
+     return this.http.get<any>("api/get_full_report", this.options);
   }
 
   getNames(){
@@ -96,5 +113,9 @@ addBehaviour(behaviour:any ,comments:any): Observable<any>{
     this.options = { class_name: this.className, behaviour: behaviour,
       comments: comments, date: this.classData[0]['date'] };
     return this.http.post<any>("/api/add_behaviour", this.options);
+}
+
+setFullReport(x:any){
+    this.fullReport = x;
 }
 }
