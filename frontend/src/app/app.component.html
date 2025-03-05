@@ -68,6 +68,7 @@
           {{item}}
         </option>
       </select>
+      <br/>
      <button (click)="getBehaviourReport()">Get overall behaviour report</button>
       <button (click)="getReport()">Get overall attendance report</button>
       <button (click)="getFullReport()">Get overall report</button>
@@ -75,7 +76,7 @@
 
     <div *ngIf="gradesList" id="studentFinalReport">
       <p>Name: {{studentReportName}}</p>
-      <table *ngFor="let item of gradesList">
+      <table *ngFor="let item of gradesList" id="reportTable">
         <tr>
           <td>{{item.grade.class}}</td>
           <td>{{item.grade.grade}}</td>

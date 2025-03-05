@@ -73,5 +73,12 @@ input, select{
 
 #studentFinalReport{
   position: absolute;
-  bottom:20%;
+  bottom:5%;
+}
+
+#studentFinalReport table, tr, td{
+  border:2px solid white;
+  border-collapse: collapse;
+  width:40%;
+  text-align: center;
 }
