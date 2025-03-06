@@ -40,10 +40,22 @@ def get_behaviour_file():
     name = request.args.get("name")
     return a.get_b_file(class_name, name)
 
+@app.route("/api/get_assignment_names")
+def get_assignment_names():
+    class_name = request.args.get("class_name")
+    return c.get_assignment_names(class_name)
+
+
 @app.route("/api/get_full_report")
 def get_full_report():
     name = request.args.get("name")
     return a.get_report(name)
+
+@app.route("/api/set_grade", methods=['POST'])
+def set_grade():
+    data = request.json
+    g.set_grade(data['assignment'], data['name'], data['class_name'], data['mark'], data['comment'])
+    return ""
 
 @app.route("/api/get_grade")
 def get_grade():

@@ -70,3 +70,15 @@ class Classes:
         f1 = open(f"{directories}{file}", "w")
         f1.write(json.dumps(d, indent=4))
         f1.close()
+
+    def get_assignment_names(self, class_name):
+        directories = "python/assignments/assignment_names/"
+        json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
+        return_data = []
+        for b in json_names:
+            with open(f"{directories}{b}") as f:
+                data = json.load(f)
+                if data["class_name"] == class_name:
+                    return_data.append(data['assignments'])
+        print(return_data)
+        return return_data

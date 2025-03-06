@@ -3,13 +3,24 @@ import { RouterOutlet } from '@angular/router';
 import {TestServiceService} from './test-service.service';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, NzProgressModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [TestServiceService]
+  providers: [TestServiceService, NzProgressModule],
+  styles: [
+    `
+      nz-progress {
+        margin-right: 8px;
+        margin-bottom: 8px;
+        display: inline-block;
+
+      }
+    `
+  ]
 })
 export class AppComponent implements OnInit{
   dataClass: any;
@@ -24,6 +35,11 @@ export class AppComponent implements OnInit{
   studentReportName: any;
   gradesList: any = [];
   overallAttendance: any;
+  submittedAssignments: any = [];
+  currentGrade: number = 0;
+  currentAssignmentComment: any;
+  allAssignments: any = [];
+  currentAssignment: any;
   constructor(private testService: TestServiceService) {
 
   }
@@ -32,6 +48,7 @@ export class AppComponent implements OnInit{
         this.testService.setNames(data);
         this.namesList = this.testService.getNames();
     })
+
   }
 
   createDefaults(data:any){
@@ -58,6 +75,9 @@ export class AppComponent implements OnInit{
     this.testService.setComment(x);
   }
 
+  setCG(x:any){
+    this.currentGrade = x;
+  }
   getFullReport(){
     this.testService.getFullReport().subscribe(data => {
           this.testService.setFullReport(data);
@@ -76,6 +96,29 @@ export class AppComponent implements OnInit{
     return this.testService.getCurrentStudent();
   }
 
+  setAssignmentComment(x:any){
+    this.currentAssignmentComment = x;
+  }
+
+  markAssignment(){
+    this.testService.markAssignment(this.currentGrade, this.currentAssignmentComment, this.currentAssignment).subscribe(data => {
+
+    })
+  }
+
+  setAssignments(x:any){
+    this.allAssignments = x[0];
+  }
+
+  setAssignment(x: any){
+    this.currentAssignment = x;
+  }
+
+  getAssignmentNames(){
+    this.testService.getAssignmentNames().subscribe(data => {
+      this.setAssignments(data);
+    })
+  }
   setCommentList (x:any){
     this.commentList = x;
   }
@@ -138,6 +181,7 @@ export class AppComponent implements OnInit{
         this.createDefaults(this.studentList);
         this.testService.setStudent(this.studentList[0]);
         this.studentLength = this.studentList.length;
+        this.getAssignmentNames();
       }
     )
   }
@@ -145,7 +189,5 @@ export class AppComponent implements OnInit{
   setStudent(x:any){
     this.testService.setStudent(x);
   }
-  title = 'frontend';
-
-
+  title = 'Student Monitoring App';
 }

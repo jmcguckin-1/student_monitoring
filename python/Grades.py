@@ -22,7 +22,8 @@ class Grades:
 
     def set_grade(self, assignment, student, class_name, grade, comment):
         directory = "python/assignments/"
-        d = {"assignment": assignment, "student": student, "class_name": class_name, "grade": grade, "comment": comment}
+        print(assignment, student, class_name, grade, comment)
+        d = {"assignment": assignment, "student": student, "class_name": class_name, "grade": int(grade), "comment": comment}
         f = open(f"{directory}{assignment}_{student}_{class_name}.json", "w")
         f.write(json.dumps(d))
         f.close()

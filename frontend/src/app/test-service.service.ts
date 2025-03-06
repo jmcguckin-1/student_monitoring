@@ -58,6 +58,17 @@ export class TestServiceService {
      return this.http.get<any>("api/get_full_report", this.options);
   }
 
+   markAssignment(mark:any, comment:any, assignment:any){
+    this.options = {name: this.chosenStudent, class_name: this.className, comment: comment,
+    assignment: assignment, mark: mark};
+        return this.http.post<any>('/api/set_grade', this.options);
+  }
+
+  getAssignmentNames(){
+      this.options = { params: new HttpParams().set('class_name', this.className) };
+     return this.http.get<any>("api/get_assignment_names", this.options);
+  }
+
   getNames(){
     return this.nameData;
   }

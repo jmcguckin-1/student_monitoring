@@ -13,6 +13,27 @@
         </li>
       </ul>
     </div>
+
+    <div *ngIf="allAssignments">
+      <select #currentAssignment (change)="setAssignment(currentAssignment.value)">
+        <option *ngFor="let item of allAssignments" [value]="item">
+          {{item}}
+        </option>
+      </select>
+      <nz-progress [nzPercent]="currentGrade" nzType="circle" [nzWidth]="80"></nz-progress>
+      <br>
+      <br>
+      <input type="text" #cg (change)="setCG(cg.value)"/>
+      <br>
+      <br>
+      <input type="text" #comment (change)="setAssignmentComment(comment.value)"/>
+      <br>
+      <br>
+      <button (click)="markAssignment()">Mark Assignment</button>
+      <br>
+      <br>
+    </div>
+
     <div *ngIf="studentList" id="attendance">
        <ul>
         <li *ngFor="let item of studentList">
