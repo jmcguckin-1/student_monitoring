@@ -13,22 +13,90 @@
         </li>
       </ul>
     </div>
-    <div *ngIf="studentList">
+    <div *ngIf="studentList" id="attendance">
        <ul>
         <li *ngFor="let item of studentList">
-          {{item}} <input type="text" className="attendanceInput" style="width:2%;" (change)="addElement($event)"/>
+          {{item}}
+          <select #attending (change)="addElement(attending.value, item)">
+          <option value="P">P (Present)</option>
+          <option value="S">S (Sick)</option>
+          <option value="A">A (Absent)</option>
+        </select>
+           <select #behaviourType (change)="updateBehaviourType(behaviourType.value, item)" style="position:absolute; margin-left:20%;">
+             <option value="M">Minor Grievance</option>
+          <option value="C">Concerning Behaviour</option>
+          <option value="SV">Severe Behaviour</option>
+        </select>
+          <input #comments (change)="updateCommentList(comments.value, item)" style="position:absolute; margin-left:80%;" />
         </li>
       </ul>
       <button style="position:absolute;" (click)="sendAttendance()">Send Attendance</button>
     </div>
 
-     <div *ngIf="namesList">
+     <div *ngIf="namesList" id="selectClass">
        <select #classReg>
         <option *ngFor="let item of namesList" [value]="item">
           {{item}}
         </option>
       </select>
-       <button (click)="setClass(classReg.value)" style="position:absolute;">Grab Class</button>
+       <button (click)="setClass(classReg.value)">Grab Class</button>
+    </div>
+
+     <div *ngIf="report" id="report">
+       <div *ngFor="let item of report">
+        <p>{{item.name}}</p>
+         <p>{{item.percent}}</p>
+         <p>{{item.sick}} sick days</p>
+         <p>{{item.absent}} no show days</p>
+       </div>
+    </div>
+
+     <div *ngIf="behaviourReport" id="report2">
+       <div *ngFor="let item of behaviourReport">
+        <p>{{item.name}}</p>
+         <p>{{item.minor_count}} minor offences</p>
+         <p>{{item.concerning_count}} concerning offences</p>
+         <p>{{item.severe_count}} severe offences</p>
+         <p>sample comments: {{item.comments}}</p>
+         <p>{{item.status}}</p>
+       </div>
+    </div>
+
+    <div *ngIf="studentList" id="studentBehaviourReports">
+       <select #studentName (change)="setStudent(studentName.value)">
+        <option *ngFor="let item of studentList" [value]="item">
+          {{item}}
+        </option>
+      </select>
+      <br/>
+     <button (click)="getBehaviourReport()">Get overall behaviour report</button>
+      <button (click)="getReport()">Get overall attendance report</button>
+      <button (click)="getFullReport()">Get overall report</button>
+    </div>
+
+    <div *ngIf="gradesList" id="studentFinalReport">
+      <p>Name: {{studentReportName}}</p>
+      <p>Overall Attendance {{overallAttendance}}%</p>
+      <table *ngFor="let item of gradesList" id="reportTable">
+        <th>Class</th>
+        <th>Average Mark</th>
+        <th>Teacher Comment</th>
+        <tr>
+          <td>{{item.grade.class}}</td>
+          <td>{{item.grade.grade}}</td>
+          <td>{{item.comments}}</td>
+        </tr>
+      </table>
+
+    </div>
+
+    <div id='finalComments'>
+      <p>Current Student: {{getCurrentStudent()}}</p>
+      <p>Enter overall student comments for this class</p>
+      <textarea #studentComment (change)="setComment(studentComment.value)">
+      </textarea>
+      <br/>
+      <button (click)="addComment()">Add Comment to final report</button>
     </div>
 
   </div>

@@ -1,1 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
+#studentReports{
+  position:absolute;
+  right:6%;
+}
+
+#studentBehaviourReports{
+  position:absolute;
+  right:3%;
+  top:40%;
+}
+
+#selectClass{
+  position:absolute;
+  left:10%;
+}
+
+#attendance{
+  position:absolute;
+  left:30%;
+  top:20%;
+  font-size:22px;
+}
+
+#report{
+  position:absolute;
+  right:10%;
+  top:25%;
+}
+
+#report2{
+  position:absolute;
+  right:10%;
+  top:50%;
+}
+
+*{
+  background-color: #72A0C1;
+  color:white;
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+ul li{
+  list-style-type: none;
+}
+
+button{
+  background-color: white;
+  color:black;
+}
+
+input, select{
+  color:gray;
+  background-color: white;
+}
+
+#finalComments{
+  position:absolute;
+  right:10%;
+  bottom:20%;
+}
+
+#finalComments textarea{
+  background-color: white;
+  font-size:18px;
+  width:90%;
+  height:60%;
+  color:black;
+}
+
+#studentFinalReport{
+  position: absolute;
+  bottom:5%;
+}
+
+#studentFinalReport table, tr, td{
+  border:2px solid white;
+  border-collapse: collapse;
+  width:40%;
+  text-align: center;
+}

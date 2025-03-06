@@ -15,27 +15,118 @@ export class AppComponent implements OnInit{
   dataClass: any;
   studentList: any;
   namesList : any;
-  attendanceList: any = [];
+  attendanceList : any = {};
+  commentList: any = {};
+  behaviourType: any = {};
+  studentLength: any;
+  report: any = [];
+  behaviourReport: any = [];
+  studentReportName: any;
+  gradesList: any = [];
+  overallAttendance: any;
   constructor(private testService: TestServiceService) {
 
   }
   ngOnInit(): void {
-
     this.testService.fetchNames().subscribe(data => {
         this.testService.setNames(data);
         this.namesList = this.testService.getNames();
     })
-
   }
 
-  addElement(event:any){
-    this.attendanceList.push(event.target.value);
+  createDefaults(data:any){
+    let aList: any = {};
+    let cList: any = {};
+    let bType: any = {};
+    for (let i=0; i<data.length; i++){
+      aList[data[i]] = "P";
+      cList[data[i]] = "";
+      bType[data[i]] = "M";
+    }
+    this.setAttendanceList(aList);
+    this.setBehaviourList(bType);
+    this.setCommentList(cList);
+  }
+
+  addElement(x:any, name:any){
+    if (Object.keys(this.attendanceList).length <= this.studentLength){
+        this.attendanceList[name] = x;
+    }
+  }
+
+  setComment(x:any){
+    this.testService.setComment(x);
+  }
+
+  getFullReport(){
+    this.testService.getFullReport().subscribe(data => {
+          this.testService.setFullReport(data);
+          this.gradesList = this.testService.getGradesCommentList();
+          this.studentReportName = this.testService.getStudentReportName();
+          this.overallAttendance = this.testService.getOverallAttendance();
+    })
+  }
+
+  addComment(){
+    this.testService.addComment().subscribe(data => {
+    })
+  }
+
+  getCurrentStudent(){
+    return this.testService.getCurrentStudent();
+  }
+
+  setCommentList (x:any){
+    this.commentList = x;
+  }
+
+  setBehaviourList (x:any){
+    this.behaviourType = x;
+  }
+
+  setBehaviourReport(a: any){
+    this.behaviourReport = a;
+  }
+
+  updateCommentList(x:any, name:any){
+     if (Object.keys(this.commentList).length <= this.studentLength){
+        this.commentList[name] = x;
+    }
+  }
+
+   updateBehaviourType(x:any, name:any){
+     if (Object.keys(this.behaviourType).length <= this.studentLength) {
+       this.behaviourType[name] = x;
+     }
+  }
+
+  setAttendanceList(x:any){
+       this.attendanceList = x;
+  }
+
+  sendBehaviour(){
+    this.testService.addBehaviour(this.behaviourType, this.commentList).subscribe(data => {
+      console.log("behaviour added");
+    })
   }
 
   sendAttendance(){
     this.testService.sendAttendance(this.attendanceList).subscribe(data => {
-      console.log("success");
+      this.sendBehaviour();
     });
+  }
+
+  getReport(){
+    this.testService.fetchReport().subscribe(data => {
+       this.testService.setReport(data);
+       this.report = this.testService.getReport();
+    })
+  }
+
+  getBehaviourReport(){
+    this.testService.fetchBehaviourReport().subscribe(data => {
+        this.setBehaviourReport(data);
+    })
   }
 
   setClass(x: any){
@@ -44,8 +135,15 @@ export class AppComponent implements OnInit{
         this.testService.setData(data);
         this.dataClass = this.testService.getData();
         this.studentList = this.testService.getStudentData();
+        this.createDefaults(this.studentList);
+        this.testService.setStudent(this.studentList[0]);
+        this.studentLength = this.studentList.length;
       }
     )
+  }
+
+  setStudent(x:any){
+    this.testService.setStudent(x);
   }
   title = 'frontend';
 
