@@ -49,7 +49,7 @@ class Classes:
                             sick_days += 1
                         if data["attendance"][name] == "A":
                             absent_days += 1
-        d = {"name": name, "percent": str(days / length * 100) + "%", "class_name": class_name, "sick": sick_days, "absent": absent_days}
+        d = {"name": name, "percent": str(days / length * 100) + "%", "class_name": class_name, "sick": sick_days, "absent": absent_days, "days": length}
         f1 = open(f"python/attendance/{name}_{class_name}_attendance.json", "w")
         f1.write(json.dumps(d, indent=4))
         f1.close()

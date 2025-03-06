@@ -76,7 +76,11 @@
 
     <div *ngIf="gradesList" id="studentFinalReport">
       <p>Name: {{studentReportName}}</p>
+      <p>Overall Attendance {{overallAttendance}}%</p>
       <table *ngFor="let item of gradesList" id="reportTable">
+        <th>Class</th>
+        <th>Average Mark</th>
+        <th>Teacher Comment</th>
         <tr>
           <td>{{item.grade.class}}</td>
           <td>{{item.grade.grade}}</td>

@@ -20,6 +20,26 @@ class Attendance:
                         final_data.append(data)
         return final_data
 
+    def get_overall_attendance(self, name):
+        directory = "python/attendance/"
+        final_data = []
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for j in json_names:
+            with open(f"{directory}{j}") as json_file:
+                data = json.load(json_file)
+                if data["name"] == name:
+                    current_sick = data['sick']
+                    current_absent = data['absent']
+                    if current_sick == 0 and current_absent == 0:
+                        final_data.append(100)
+                    else:
+                        days = data['days']
+                        attended = days
+                        attended -= current_sick
+                        attended -= current_absent
+                        final_data.append((attended / days) * 100)
+        return sum(final_data) / len(final_data)
+
 
     def add_behaviour(self, behaviour, comments, class_name, date):
         directory = "python/classes/"
@@ -112,7 +132,8 @@ class Attendance:
         g = Grades()
         grades = g.get_student_grades(student_name)
         comments = self.get_student_comments(student_name)
-        data = [{"student_name": student_name}]
+        overall_attendance = self.get_overall_attendance(student_name)
+        data = [{"student_name": student_name, "attendance": overall_attendance}]
         for i in range(0, len(grades)):
             d = {"grade": grades[i], "comments": comments[i]}
             data.append(d)
@@ -124,6 +145,7 @@ class Attendance:
     def get_report(self, student_name):
         directory = "python/reports/"
         return_data = []
+        self.generate_full_report(student_name)
         json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
         for a in json_names:
             with open(f"{directory}{a}") as json_file:

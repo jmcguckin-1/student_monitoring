@@ -36,12 +36,16 @@ export class TestServiceService {
     return this.fullReport[0][0]["student_name"];
   }
 
+  getOverallAttendance(){
+    return this.fullReport[0][0]["attendance"];
+  }
+
   getGradesCommentList(){
     let list : any = [];
     for (let i=1; i<3; i++) {
       list.push(this.fullReport[0][i]);
     }
-    return list
+    return list;
   }
 
   addComment(){
