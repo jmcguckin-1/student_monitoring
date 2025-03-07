@@ -119,7 +119,15 @@ export class AppComponent implements OnInit{
      this.hasSubmitted = data;
 
      if (this.hasSubmitted['late']){
-       alert("student has submitted their assignment late");
+       this.testService.updateBehaviour("C", "Assignment Handed in Late").subscribe(data => {
+
+       })
+     }
+
+     if (!this.hasSubmitted['submitted']){
+       this.testService.updateBehaviour("SV", "Assignment Not handed in").subscribe(data => {
+
+       })
      }
     })
   }

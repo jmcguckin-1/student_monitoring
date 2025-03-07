@@ -76,5 +76,11 @@ def has_student_submitted():
     assignment = request.args.get("assignment")
     return g.has_student_submitted(name, assignment, class_name)
 
+@app.route("/api/update_b_file", methods=['POST'])
+def update_behaviour_file():
+    data = request.json
+    g.update_behaviour_file(data['name'], data['class_name'], data['behaviour'], data['comments'])
+    return ""
+
 if __name__ == '__main__':
     app.run()

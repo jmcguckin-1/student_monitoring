@@ -74,3 +74,25 @@ class Grades:
         if submit_date > dates[index]:
             late = True
         return late
+
+    def update_behaviour_file(self, student, class_name, behaviour, comments):
+        directory = "python/behaviour/"
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        d = []
+        file = ""
+        for j in json_names:
+            with open(f"{directory}{j}") as json_file:
+                json_data = json.load(json_file)
+                if json_data["class_name"] == class_name and json_data["name"] == student:
+                    file = j
+                    if behaviour == "M":
+                        json_data.update({"minor_count": json_data["minor_count"] + 1})
+                    elif behaviour == "C":
+                        json_data.update({"concerning_count": json_data["concerning_count"] + 1})
+                    else:
+                        json_data.update({"severe_count": json_data["severe_count"] + 1})
+                    json_data["comments"].append(comments)
+                    d = json_data
+        f1 = open(f"{directory}{file}", "w")
+        f1.write(json.dumps(d, indent=4))
+        f1.close()

@@ -144,6 +144,12 @@ addBehaviour(behaviour:any ,comments:any): Observable<any>{
     return this.http.post<any>("/api/add_behaviour", this.options);
 }
 
+updateBehaviour(behaviour:any ,comments:any): Observable<any>{
+    this.options = { class_name: this.className, behaviour: behaviour,
+      comments: comments, name: this.chosenStudent };
+    return this.http.post<any>("/api/update_b_file", this.options);
+}
+
 setFullReport(x:any){
     this.fullReport = x;
 }
