@@ -35,11 +35,11 @@ export class AppComponent implements OnInit{
   studentReportName: any;
   gradesList: any = [];
   overallAttendance: any;
-  submittedAssignments: any = [];
   currentGrade: number = 0;
   currentAssignmentComment: any;
   allAssignments: any = [];
   currentAssignment: any;
+  hasSubmitted : any;
   constructor(private testService: TestServiceService) {
 
   }
@@ -98,6 +98,7 @@ export class AppComponent implements OnInit{
 
   setAssignmentComment(x:any){
     this.currentAssignmentComment = x;
+    this.testService.setAssignment(x);
   }
 
   markAssignment(){
@@ -108,15 +109,31 @@ export class AppComponent implements OnInit{
 
   setAssignments(x:any){
     this.allAssignments = x[0];
+    this.setAssignment(this.allAssignments[0]);
   }
 
   setAssignment(x: any){
     this.currentAssignment = x;
+    this.testService.setAssignment(x);
+    this.testService.hasStudentSubmitted().subscribe(data => {
+     this.hasSubmitted = data;
+
+     if (this.hasSubmitted['late']){
+       alert("student has submitted their assignment late");
+     }
+    })
   }
 
   getAssignmentNames(){
     this.testService.getAssignmentNames().subscribe(data => {
       this.setAssignments(data);
+    })
+    this.testService.hasStudentSubmitted().subscribe(data => {
+     this.hasSubmitted = data;
+
+     if (!this.hasSubmitted['submitted']){
+       alert("student has not submitted their assignment");
+     }
     })
   }
   setCommentList (x:any){

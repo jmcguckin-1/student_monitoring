@@ -69,5 +69,12 @@ def add_comment():
     a.store_student_class_comment(data['comment'], data['name'], data['class_name'])
     return ""
 
+@app.route("/api/has_student_submitted")
+def has_student_submitted():
+    class_name = request.args.get("class_name")
+    name = request.args.get("name")
+    assignment = request.args.get("assignment")
+    return g.has_student_submitted(name, assignment, class_name)
+
 if __name__ == '__main__':
     app.run()

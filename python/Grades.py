@@ -22,7 +22,6 @@ class Grades:
 
     def set_grade(self, assignment, student, class_name, grade, comment):
         directory = "python/assignments/"
-        print(assignment, student, class_name, grade, comment)
         d = {"assignment": assignment, "student": student, "class_name": class_name, "grade": int(grade), "comment": comment}
         f = open(f"{directory}{assignment}_{student}_{class_name}.json", "w")
         f.write(json.dumps(d))
@@ -38,3 +37,40 @@ class Grades:
             if grade is not None:
                 return_data.append({"class": c, "grade": grade})
         return return_data
+
+    def has_student_submitted(self, student, assignment, class_name):
+        directory = "python/submitted_assignments/"
+        submitted = False
+        date_submitted = ""
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for j in json_names:
+            with open(f"{directory}{j}") as json_file:
+                json_data = json.load(json_file)
+                if json_data["name"] == student and json_data["class_name"] == class_name:
+                    if json_data["assignment_name"] == assignment:
+                        submitted = True
+                        date_submitted = json_data["submit_date"]
+        late = self.is_assignment_late(class_name, student, date_submitted)
+        return {"submitted": submitted, "late": late}
+
+    def is_assignment_late(self, class_name, assignment, submit_date):
+        directory = "python/assignments/assignment_names/"
+        late = False
+        names = []
+        dates = []
+        index = 0
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for j in json_names:
+            with open(f"{directory}{j}") as json_file:
+                json_data = json.load(json_file)
+                if json_data["class_name"] == class_name:
+                    names = json_data["assignments"]
+                    dates = json_data["due_date"]
+
+        for i in range(0, len(names)):
+            if assignment == names[i]:
+               index = i
+
+        if submit_date > dates[index]:
+            late = True
+        return late

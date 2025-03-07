@@ -1,4 +1,5 @@
 {
   "class_name": "14It1",
-  "assignments": ["Programming", "Databases"]
+  "assignments": ["Programming", "Databases"],
+  "due_date": ["06-03-2025", "08-03-2025"]
 }

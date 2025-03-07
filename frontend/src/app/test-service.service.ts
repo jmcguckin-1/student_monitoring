@@ -16,6 +16,7 @@ export class TestServiceService {
   private currentComment = "";
   options: any;
   private fullReport = [];
+  private currentAssignment = "";
   setData (x: any){
     this.classData = x;
   }
@@ -38,6 +39,12 @@ export class TestServiceService {
 
   getOverallAttendance(){
     return this.fullReport[0][0]["attendance"];
+  }
+
+  setAssignment(x:any){
+    if (x !== ''){
+      this.currentAssignment = x;
+    }
   }
 
   getGradesCommentList(){
@@ -67,6 +74,13 @@ export class TestServiceService {
   getAssignmentNames(){
       this.options = { params: new HttpParams().set('class_name', this.className) };
      return this.http.get<any>("api/get_assignment_names", this.options);
+  }
+
+  hasStudentSubmitted(){
+      this.options = { params: new HttpParams().set('class_name', this.className)
+          .set("name", this.chosenStudent)
+          .set("assignment", this.currentAssignment)};
+     return this.http.get<any>("api/has_student_submitted", this.options);
   }
 
   getNames(){
