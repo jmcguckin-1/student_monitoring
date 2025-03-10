@@ -75,6 +75,7 @@
      <div *ngIf="behaviourReport" id="report2">
        <div *ngFor="let item of behaviourReport">
         <p>{{item.name}}</p>
+         <p>{{item.good_count}} good behaviour displays</p>
          <p>{{item.minor_count}} minor offences</p>
          <p>{{item.concerning_count}} concerning offences</p>
          <p>{{item.severe_count}} severe offences</p>

@@ -123,6 +123,11 @@ export class AppComponent implements OnInit{
 
        })
      }
+     else{
+         this.testService.updateBehaviour("G", "Assignment Handed In On Time").subscribe(data => {
+
+       })
+     }
 
      if (!this.hasSubmitted['submitted']){
        this.testService.updateBehaviour("SV", "Assignment Not handed in").subscribe(data => {
@@ -197,6 +202,12 @@ export class AppComponent implements OnInit{
     })
   }
 
+  getReward(){
+    this.testService.getRewardEligibility().subscribe(data => {
+
+    })
+  }
+
   setClass(x: any){
     this.testService.setClass(x);
       this.testService.fetchClassData().subscribe(data => {
@@ -207,12 +218,14 @@ export class AppComponent implements OnInit{
         this.testService.setStudent(this.studentList[0]);
         this.studentLength = this.studentList.length;
         this.getAssignmentNames();
+        this.getReward();
       }
     )
   }
 
   setStudent(x:any){
     this.testService.setStudent(x);
+    this.getReward();
   }
   title = 'Student Monitoring App';
 }

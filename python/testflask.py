@@ -82,5 +82,13 @@ def update_behaviour_file():
     g.update_behaviour_file(data['name'], data['class_name'], data['behaviour'], data['comments'])
     return ""
 
+@app.route("/api/eligible_for_reward")
+def eligible_for_reward():
+    class_name = request.args.get("class_name")
+    name = request.args.get("name")
+    a.eligible_for_reward(name, class_name)
+    return ""
+
+
 if __name__ == '__main__':
     app.run()

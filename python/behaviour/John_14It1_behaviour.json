@@ -3,11 +3,17 @@
     "class_name": "14It1",
     "minor_count": 2,
     "severe_count": 0,
-    "concerning_count": 1,
+    "concerning_count": 0,
     "comments": [
         "Talking Way too Much",
         "Talking Way too Much",
-        "Assignment Handed in Late"
+        "Assignment Handed In On Time",
+        "Assignment Handed In On Time",
+        "Assignment Handed In On Time",
+        "Assignment Handed In On Time",
+        "Assignment Handed In On Time"
     ],
-    "status": "nothing to worry about"
+    "status": "nothing to worry about",
+    "good_count": 1,
+    "reward": "Yes"
 }

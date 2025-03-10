@@ -138,6 +138,13 @@ sendAttendance(x:any): Observable<any> {
     return this.http.get<any>('/api/get_names');
 }
 
+ getRewardEligibility(): Observable<any> {
+      this.options = { params: new HttpParams()
+        .set('name', this.chosenStudent)
+        .set('class_name', this.className)};
+    return this.http.get<any>('/api/eligible_for_reward', this.options);
+}
+
 addBehaviour(behaviour:any ,comments:any): Observable<any>{
     this.options = { class_name: this.className, behaviour: behaviour,
       comments: comments, date: this.classData[0]['date'] };
