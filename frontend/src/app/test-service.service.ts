@@ -15,7 +15,7 @@ export class TestServiceService {
   private chosenStudent = "";
   private currentComment = "";
   options: any;
-  private fullReport = [];
+  private fullReport: any  = [];
   private currentAssignment = "";
   setData (x: any){
     this.classData = x;
@@ -49,15 +49,15 @@ export class TestServiceService {
 
   getGradesCommentList(){
     let list : any = [];
-    for (let i=1; i<3; i++) {
+    for (let i=1; i<this.fullReport[0].length; i++) {
       list.push(this.fullReport[0][i]);
     }
     return list;
   }
 
   addComment(){
-        this.options = {name: this.chosenStudent, class_name: this.className, comment: this.currentComment};
-        return this.http.post<any>('/api/add_comment', this.options);
+    this.options = {name: this.chosenStudent, class_name: this.className, comment: this.currentComment};
+    return this.http.post<any>('/api/add_comment', this.options);
   }
 
   getFullReport(){
@@ -160,4 +160,5 @@ updateBehaviour(behaviour:any ,comments:any): Observable<any>{
 setFullReport(x:any){
     this.fullReport = x;
 }
+
 }

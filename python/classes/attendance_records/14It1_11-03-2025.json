@@ -6,14 +6,19 @@
         "Deivis": "P"
     },
     "date": "11-03-2025",
+    "students": [
+        "John",
+        "Erik",
+        "Deivis"
+    ],
     "behaviour": {
-        "John": "C",
-        "Erik": "SV",
-        "Deivis": "C"
+        "John": "M",
+        "Erik": "M",
+        "Deivis": "M"
     },
     "comments": {
-        "John": "not doing enough work",
-        "Erik": "too much kali linux",
-        "Deivis": "too many distractions"
+        "John": "",
+        "Erik": "",
+        "Deivis": ""
     }
 }

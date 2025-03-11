@@ -44,9 +44,11 @@
           <option value="A">A (Absent)</option>
         </select>
            <select #behaviourType (change)="updateBehaviourType(behaviourType.value, item)" style="position:absolute; margin-left:20%;">
+             <option value="G">Good Behaviour</option>
              <option value="M">Minor Grievance</option>
           <option value="C">Concerning Behaviour</option>
           <option value="SV">Severe Behaviour</option>
+             <option value="N">Nothing to Report</option>
         </select>
           <input #comments (change)="updateCommentList(comments.value, item)" style="position:absolute; margin-left:80%;" />
         </li>
