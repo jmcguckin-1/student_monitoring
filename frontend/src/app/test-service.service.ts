@@ -129,8 +129,8 @@ export class TestServiceService {
     return this.http.get<any>('/api/get_behaviour_file', this.options);
 }
 
-sendAttendance(x:any): Observable<any> {
-    this.options = { list: x, name: this.className };
+sendAttendance(x:any, date:any): Observable<any> {
+    this.options = { list: x, name: this.className, date: date };
     return this.http.post<any>('/api/update_class', this.options);
 }
 
@@ -145,9 +145,9 @@ sendAttendance(x:any): Observable<any> {
     return this.http.get<any>('/api/eligible_for_reward', this.options);
 }
 
-addBehaviour(behaviour:any ,comments:any): Observable<any>{
+addBehaviour(behaviour:any ,comments:any, date:any): Observable<any>{
     this.options = { class_name: this.className, behaviour: behaviour,
-      comments: comments, date: this.classData[0]['date'] };
+      comments: comments, date: date};
     return this.http.post<any>("/api/add_behaviour", this.options);
 }
 

@@ -8,7 +8,7 @@ class Classes:
 
     def get_class_names(self):
         d = []
-        directories = "python/classes/"
+        directories = "python/classes/templates/"
         json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
         for a in json_names:
             with open(f"{directories}{a}") as f:
@@ -20,7 +20,7 @@ class Classes:
 
     def get_class(self,name):
         d = []
-        directories = "python/classes/"
+        directories = "python/classes/templates/"
         json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
         for a in json_names:
             with open (f"{directories}{a}") as f:
@@ -31,7 +31,7 @@ class Classes:
 
 
     def create_attendance_file(self, class_name, name):
-        directories = "python/classes/"
+        directories = "python/classes/attendance_records/"
         json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
         length = 0
         days = 0
@@ -55,21 +55,14 @@ class Classes:
         f1.close()
 
 
-    def update_class(self, attendance, name):
-        d = []
-        directories = "python/classes/"
-        json_names = [f for f in os.listdir(directories) if f.endswith(".json")]
-        file = ""
-        for b in json_names:
-             with open(f"{directories}{b}") as f:
-                old_data = json.load(f)
-                if old_data["name"] == name:
-                    old_data.update({"attendance": attendance})
-                    d = old_data
-                    file = b
-        f1 = open(f"{directories}{file}", "w")
-        f1.write(json.dumps(d, indent=4))
+    def create_class_attendance(self, attendance, name, date):
+        # create a new file for this date.
+        directory = "python/classes/attendance_records/"
+        data = {"name": name, "attendance": attendance, "date": date}
+        f1 = open(f"{directory}{name}_{date}.json", "w")
+        f1.write(json.dumps(data, indent=4))
         f1.close()
+
 
     def get_assignment_names(self, class_name):
         directories = "python/assignments/assignment_names/"

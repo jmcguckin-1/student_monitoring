@@ -19,7 +19,7 @@ def get_names():
 @app.route("/api/update_class", methods=['POST'])
 def update_class():
     data = request.json
-    c.update_class(data['list'], data['name'])
+    c.create_class_attendance(data['list'], data['name'], data['date'])
     return ""
 
 @app.route("/api/get_attendance_file")

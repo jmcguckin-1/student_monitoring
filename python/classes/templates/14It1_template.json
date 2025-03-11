@@ -1,0 +1,16 @@
+{
+    "name": "14It1",
+    "students": [
+        "John",
+        "Erik",
+        "Deivis"
+    ],
+    "attendance": {
+        "John": "P",
+        "Erik": "P",
+        "Deivis": "P"
+    },
+    "behaviour": {},
+    "comments": {
+    }
+}

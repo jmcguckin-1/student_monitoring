@@ -42,7 +42,7 @@ class Attendance:
 
 
     def add_behaviour(self, behaviour, comments, class_name, date):
-        directory = "python/classes/"
+        directory = "python/classes/attendance_records/"
         json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
         d = []
         file = ""

@@ -6,10 +6,10 @@
     </div>
 
     <div *ngIf="dataClass">
+      {{currentDate}}
       <ul>
         <li *ngFor="let item of dataClass">
           {{item.name}}
-           {{item.date}}
         </li>
       </ul>
     </div>

@@ -4,13 +4,14 @@ import {TestServiceService} from './test-service.service';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, NzProgressModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [TestServiceService, NzProgressModule],
+  providers: [TestServiceService, NzProgressModule, DatePipe],
   styles: [
     `
       nz-progress {
@@ -40,8 +41,8 @@ export class AppComponent implements OnInit{
   allAssignments: any = [];
   currentAssignment: any;
   hasSubmitted : any;
-  constructor(private testService: TestServiceService) {
-
+  currentDate: any;
+  constructor(private testService: TestServiceService, private datePipe: DatePipe) {
   }
   ngOnInit(): void {
     this.testService.fetchNames().subscribe(data => {
@@ -49,6 +50,7 @@ export class AppComponent implements OnInit{
         this.namesList = this.testService.getNames();
     })
 
+    this.currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
   }
 
   createDefaults(data:any){
@@ -178,15 +180,15 @@ export class AppComponent implements OnInit{
   }
 
   sendBehaviour(){
-    this.testService.addBehaviour(this.behaviourType, this.commentList).subscribe(data => {
+    this.testService.addBehaviour(this.behaviourType, this.commentList, this.currentDate).subscribe(data => {
       console.log("behaviour added");
     })
   }
 
   sendAttendance(){
-    this.testService.sendAttendance(this.attendanceList).subscribe(data => {
-      this.sendBehaviour();
+    this.testService.sendAttendance(this.attendanceList, this.currentDate).subscribe(data => {
     });
+    this.sendBehaviour();
   }
 
   getReport(){

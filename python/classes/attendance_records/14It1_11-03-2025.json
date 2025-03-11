@@ -1,0 +1,19 @@
+{
+    "name": "14It1",
+    "attendance": {
+        "John": "P",
+        "Erik": "P",
+        "Deivis": "P"
+    },
+    "date": "11-03-2025",
+    "behaviour": {
+        "John": "C",
+        "Erik": "SV",
+        "Deivis": "C"
+    },
+    "comments": {
+        "John": "not doing enough work",
+        "Erik": "too much kali linux",
+        "Deivis": "too many distractions"
+    }
+}
