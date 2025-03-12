@@ -15,7 +15,8 @@ export class TestServiceService {
   private chosenStudent = "";
   private currentComment = "";
   options: any;
-  private fullReport = [];
+  private fullReport: any  = [];
+  private currentAssignment = "";
   setData (x: any){
     this.classData = x;
   }
@@ -40,22 +41,46 @@ export class TestServiceService {
     return this.fullReport[0][0]["attendance"];
   }
 
+  setAssignment(x:any){
+    if (x !== ''){
+      this.currentAssignment = x;
+    }
+  }
+
   getGradesCommentList(){
     let list : any = [];
-    for (let i=1; i<3; i++) {
+    for (let i=1; i<this.fullReport[0].length; i++) {
       list.push(this.fullReport[0][i]);
     }
     return list;
   }
 
   addComment(){
-        this.options = {name: this.chosenStudent, class_name: this.className, comment: this.currentComment};
-        return this.http.post<any>('/api/add_comment', this.options);
+    this.options = {name: this.chosenStudent, class_name: this.className, comment: this.currentComment};
+    return this.http.post<any>('/api/add_comment', this.options);
   }
 
   getFullReport(){
      this.options = { params: new HttpParams().set('name', this.chosenStudent) };
      return this.http.get<any>("api/get_full_report", this.options);
+  }
+
+   markAssignment(mark:any, comment:any, assignment:any){
+    this.options = {name: this.chosenStudent, class_name: this.className, comment: comment,
+    assignment: assignment, mark: mark};
+        return this.http.post<any>('/api/set_grade', this.options);
+  }
+
+  getAssignmentNames(){
+      this.options = { params: new HttpParams().set('class_name', this.className) };
+     return this.http.get<any>("api/get_assignment_names", this.options);
+  }
+
+  hasStudentSubmitted(){
+      this.options = { params: new HttpParams().set('class_name', this.className)
+          .set("name", this.chosenStudent)
+          .set("assignment", this.currentAssignment)};
+     return this.http.get<any>("api/has_student_submitted", this.options);
   }
 
   getNames(){
@@ -104,8 +129,8 @@ export class TestServiceService {
     return this.http.get<any>('/api/get_behaviour_file', this.options);
 }
 
-sendAttendance(x:any): Observable<any> {
-    this.options = { list: x, name: this.className };
+sendAttendance(x:any, date:any): Observable<any> {
+    this.options = { list: x, name: this.className, date: date };
     return this.http.post<any>('/api/update_class', this.options);
 }
 
@@ -113,13 +138,27 @@ sendAttendance(x:any): Observable<any> {
     return this.http.get<any>('/api/get_names');
 }
 
-addBehaviour(behaviour:any ,comments:any): Observable<any>{
+ getRewardEligibility(): Observable<any> {
+      this.options = { params: new HttpParams()
+        .set('name', this.chosenStudent)
+        .set('class_name', this.className)};
+    return this.http.get<any>('/api/eligible_for_reward', this.options);
+}
+
+addBehaviour(behaviour:any ,comments:any, date:any): Observable<any>{
     this.options = { class_name: this.className, behaviour: behaviour,
-      comments: comments, date: this.classData[0]['date'] };
+      comments: comments, date: date};
     return this.http.post<any>("/api/add_behaviour", this.options);
+}
+
+updateBehaviour(behaviour:any ,comments:any): Observable<any>{
+    this.options = { class_name: this.className, behaviour: behaviour,
+      comments: comments, name: this.chosenStudent };
+    return this.http.post<any>("/api/update_b_file", this.options);
 }
 
 setFullReport(x:any){
     this.fullReport = x;
 }
+
 }

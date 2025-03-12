@@ -7,8 +7,10 @@
     ],
     "attendance": [
         "P",
-        "A",
-        "S"
+        "P",
+        "P"
     ],
-    "date": "12-05-2025"
+    "behaviour": {},
+    "comments": {
+    }
 }

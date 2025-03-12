@@ -42,7 +42,7 @@ class Attendance:
 
 
     def add_behaviour(self, behaviour, comments, class_name, date):
-        directory = "python/classes/"
+        directory = "python/classes/attendance_records/"
         json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
         d = []
         file = ""
@@ -54,9 +54,12 @@ class Attendance:
                         file = j
                         data["comments"] = comments
                         d = data
-        f1 = open(f"{directory}{file}", "w")
-        f1.write(json.dumps(d, indent=4))
-        f1.close()
+        if len(file) > 0:
+            f1 = open(f"{directory}{file}", "w")
+            f1.write(json.dumps(d, indent=4))
+            f1.close()
+            return {"success": True}
+        return {"success": False}
 
 
     def get_student_status(self, m, c, sv):
@@ -96,14 +99,17 @@ class Attendance:
 
     def get_b_file(self, class_name, name):
         directory = "python/behaviour/"
-        self.create_behaviour_file(name, class_name)
         return_data = []
-        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
-        for a in json_names:
-            with open(f"{directory}{a}") as json_file:
+        with open(f"{directory}{name}_{class_name}_behaviour.json") as json_file:
+            data = json.load(json_file)
+            return_data.append(data)
+
+        if not return_data:
+            self.create_behaviour_file(name, class_name)
+            with open(f"{directory}{name}_{class_name}_behaviour.json") as json_file:
                 data = json.load(json_file)
-                if data["class_name"] == class_name and name == data["name"]:
-                    return_data.append(data)
+                return_data.append(data)
+
         return return_data
 
 
@@ -126,14 +132,26 @@ class Attendance:
                     return_data.append(data['comment'])
         return return_data
 
+    def get_student_reward_eligibility(self, student):
+        return_data = []
+        directory = "python/behaviour/"
+        json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
+        for a in json_names:
+            with open(f"{directory}{a}") as json_file:
+                data = json.load(json_file)
+                if student == data["name"]:
+                    return_data.append(data['reward'])
+        return return_data
 
     def generate_full_report(self, student_name):
         directory = "python/reports/"
         g = Grades()
-        grades = g.get_student_grades(student_name)
+        c = Classes()
+        grades = g.get_student_grades(student_name, c)
         comments = self.get_student_comments(student_name)
         overall_attendance = self.get_overall_attendance(student_name)
-        data = [{"student_name": student_name, "attendance": overall_attendance}]
+        reward = self.get_student_reward_eligibility(student_name)
+        data = [{"student_name": student_name, "attendance": overall_attendance, "reward": reward}]
         for i in range(0, len(grades)):
             d = {"grade": grades[i], "comments": comments[i]}
             data.append(d)
@@ -146,10 +164,21 @@ class Attendance:
         directory = "python/reports/"
         return_data = []
         self.generate_full_report(student_name)
+        with open(f"{directory}{student_name}_report.json") as json_file:
+                data = json.load(json_file)
+                return_data.append(data)
+        return return_data
+
+    def eligible_for_reward(self, student_name, class_name):
+        directory = "python/behaviour/"
         json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
         for a in json_names:
             with open(f"{directory}{a}") as json_file:
                 data = json.load(json_file)
-                if data[0]["student_name"] == student_name:
-                    return_data.append(data)
-        return return_data
+                if data["class_name"] == class_name and data["name"] == student_name:
+                    if data["good_count"] >= 10:
+                        data.update({"good_count": 0})
+                        data["reward"] = "Yes"
+                        f1 = open(f"{directory}{student_name}_{class_name}_behaviour.json", "w")
+                        f1.write(json.dumps(data, indent=4))
+                        f1.close()

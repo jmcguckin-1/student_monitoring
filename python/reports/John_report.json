@@ -1,12 +1,15 @@
 [
     {
         "student_name": "John",
-        "attendance": 75.0
+        "attendance": 75.0,
+        "reward": [
+            "Yes"
+        ]
     },
     {
         "grade": {
             "class": "14It1",
-            "grade": 80.0
+            "grade": 78.0
         },
         "comments": "John has been a pleasure to teach this year. His constant top class work, combined with his attitude and his friendly demeanour set him up for top marks in ICT this year    "
     },

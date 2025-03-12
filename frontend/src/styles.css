@@ -7,7 +7,7 @@
 #studentBehaviourReports{
   position:absolute;
   right:3%;
-  top:40%;
+  top:20%;
 }
 
 #selectClass{
@@ -24,14 +24,16 @@
 
 #report{
   position:absolute;
-  right:10%;
+  right:14%;
   top:25%;
+  font-size:24px;
 }
 
 #report2{
   position:absolute;
   right:10%;
-  top:50%;
+  width:20%;
+  top:30%;
 }
 
 *{
@@ -60,7 +62,7 @@ input, select{
 #finalComments{
   position:absolute;
   right:10%;
-  bottom:20%;
+  bottom:10%;
 }
 
 #finalComments textarea{

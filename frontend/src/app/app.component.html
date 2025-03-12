@@ -6,13 +6,34 @@
     </div>
 
     <div *ngIf="dataClass">
+      {{currentDate}}
       <ul>
         <li *ngFor="let item of dataClass">
           {{item.name}}
-           {{item.date}}
         </li>
       </ul>
     </div>
+
+    <div *ngIf="allAssignments">
+      <select #currentAssignment (change)="setAssignment(currentAssignment.value)">
+        <option *ngFor="let item of allAssignments" [value]="item">
+          {{item}}
+        </option>
+      </select>
+      <nz-progress [nzPercent]="currentGrade" nzType="circle" [nzWidth]="80"></nz-progress>
+      <br>
+      <br>
+      <input type="text" #cg (change)="setCG(cg.value)"/>
+      <br>
+      <br>
+      <input type="text" #comment (change)="setAssignmentComment(comment.value)"/>
+      <br>
+      <br>
+      <button (click)="markAssignment()">Mark Assignment</button>
+      <br>
+      <br>
+    </div>
+
     <div *ngIf="studentList" id="attendance">
        <ul>
         <li *ngFor="let item of studentList">
@@ -23,14 +44,18 @@
           <option value="A">A (Absent)</option>
         </select>
            <select #behaviourType (change)="updateBehaviourType(behaviourType.value, item)" style="position:absolute; margin-left:20%;">
+             <option value="G">Good Behaviour</option>
              <option value="M">Minor Grievance</option>
           <option value="C">Concerning Behaviour</option>
           <option value="SV">Severe Behaviour</option>
+             <option value="N">Nothing to Report</option>
         </select>
           <input #comments (change)="updateCommentList(comments.value, item)" style="position:absolute; margin-left:80%;" />
         </li>
       </ul>
       <button style="position:absolute;" (click)="sendAttendance()">Send Attendance</button>
+      <br/>
+      <button  style="position:absolute;" (click)="sendBehaviour()">Send Behaviour</button>
     </div>
 
      <div *ngIf="namesList" id="selectClass">
@@ -44,7 +69,7 @@
 
      <div *ngIf="report" id="report">
        <div *ngFor="let item of report">
-        <p>{{item.name}}</p>
+        <p>Attendance Report for {{item.name}}</p>
          <p>{{item.percent}}</p>
          <p>{{item.sick}} sick days</p>
          <p>{{item.absent}} no show days</p>
@@ -54,6 +79,7 @@
      <div *ngIf="behaviourReport" id="report2">
        <div *ngFor="let item of behaviourReport">
         <p>{{item.name}}</p>
+         <p>{{item.good_count}} good behaviour displays</p>
          <p>{{item.minor_count}} minor offences</p>
          <p>{{item.concerning_count}} concerning offences</p>
          <p>{{item.severe_count}} severe offences</p>
