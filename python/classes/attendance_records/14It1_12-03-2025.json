@@ -1,0 +1,24 @@
+{
+    "name": "14It1",
+    "attendance": {
+        "John": "P",
+        "Erik": "P",
+        "Deivis": "P"
+    },
+    "date": "12-03-2025",
+    "students": [
+        "John",
+        "Erik",
+        "Deivis"
+    ],
+    "behaviour": {
+        "John": "G",
+        "Erik": "G",
+        "Deivis": "G"
+    },
+    "comments": {
+        "John": "",
+        "Erik": "",
+        "Deivis": ""
+    }
+}

@@ -54,6 +54,8 @@
         </li>
       </ul>
       <button style="position:absolute;" (click)="sendAttendance()">Send Attendance</button>
+      <br/>
+      <button  style="position:absolute;" (click)="sendBehaviour()">Send Behaviour</button>
     </div>
 
      <div *ngIf="namesList" id="selectClass">
@@ -67,7 +69,7 @@
 
      <div *ngIf="report" id="report">
        <div *ngFor="let item of report">
-        <p>{{item.name}}</p>
+        <p>Attendance Report for {{item.name}}</p>
          <p>{{item.percent}}</p>
          <p>{{item.sick}} sick days</p>
          <p>{{item.absent}} no show days</p>

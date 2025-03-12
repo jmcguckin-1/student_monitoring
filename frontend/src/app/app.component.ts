@@ -60,7 +60,7 @@ export class AppComponent implements OnInit{
     for (let i=0; i<data.length; i++){
       aList[data[i]] = "P";
       cList[data[i]] = "";
-      bType[data[i]] = "M";
+      bType[data[i]] = "G";
     }
     this.setAttendanceList(aList);
     this.setBehaviourList(bType);
@@ -181,26 +181,38 @@ export class AppComponent implements OnInit{
 
   sendBehaviour(){
     this.testService.addBehaviour(this.behaviourType, this.commentList, this.currentDate).subscribe(data => {
-      console.log("behaviour added");
+      if (data['success']){
+        alert("Behaviour successfully added!");
+      }
+      else{
+        alert("You need to send the attendance data first");
+      }
     })
   }
 
   sendAttendance(){
     this.testService.sendAttendance(this.attendanceList, this.currentDate).subscribe(data => {
     });
-    this.sendBehaviour();
   }
 
   getReport(){
     this.testService.fetchReport().subscribe(data => {
        this.testService.setReport(data);
        this.report = this.testService.getReport();
+       // @ts-ignore
+       document.getElementById("report").style.display='block';
+       // @ts-ignore
+       document.getElementById("report2").style.display='none';
     })
   }
 
   getBehaviourReport(){
     this.testService.fetchBehaviourReport().subscribe(data => {
         this.setBehaviourReport(data);
+       // @ts-ignore
+       document.getElementById("report").style.display='none';
+       // @ts-ignore
+       document.getElementById("report2").style.display='block';
     })
   }
 

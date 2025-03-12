@@ -31,8 +31,7 @@ def get_file():
 @app.route("/api/add_behaviour", methods=['POST'])
 def add_behaviour():
     data = request.json
-    a.add_behaviour(data['behaviour'], data['comments'], data['class_name'], data['date'])
-    return ""
+    return a.add_behaviour(data['behaviour'], data['comments'], data['class_name'], data['date'])
 
 @app.route("/api/get_behaviour_file")
 def get_behaviour_file():

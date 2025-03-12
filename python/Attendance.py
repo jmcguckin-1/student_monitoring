@@ -43,7 +43,6 @@ class Attendance:
 
     def add_behaviour(self, behaviour, comments, class_name, date):
         directory = "python/classes/attendance_records/"
-        c = Classes()
         json_names = [f for f in os.listdir(directory) if f.endswith(".json")]
         d = []
         file = ""
@@ -55,9 +54,12 @@ class Attendance:
                         file = j
                         data["comments"] = comments
                         d = data
-        f1 = open(f"{directory}{file}", "w")
-        f1.write(json.dumps(d, indent=4))
-        f1.close()
+        if len(file) > 0:
+            f1 = open(f"{directory}{file}", "w")
+            f1.write(json.dumps(d, indent=4))
+            f1.close()
+            return {"success": True}
+        return {"success": False}
 
 
     def get_student_status(self, m, c, sv):
@@ -144,7 +146,8 @@ class Attendance:
     def generate_full_report(self, student_name):
         directory = "python/reports/"
         g = Grades()
-        grades = g.get_student_grades(student_name)
+        c = Classes()
+        grades = g.get_student_grades(student_name, c)
         comments = self.get_student_comments(student_name)
         overall_attendance = self.get_overall_attendance(student_name)
         reward = self.get_student_reward_eligibility(student_name)

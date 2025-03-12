@@ -1,5 +1,4 @@
 import json, os
-from Classes import *
 
 class Grades:
 
@@ -28,9 +27,8 @@ class Grades:
         f.close()
 
 
-    def get_student_grades(self, student):
+    def get_student_grades(self, student, c):
         return_data = []
-        c = Classes()
         classes = c.get_class_names()
         for c in classes:
             grade = self.get_average_grade(student, c)
